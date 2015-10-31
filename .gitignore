@@ -1,6 +1,12 @@
+# [Bandit project ignores]
+# csv files from movielens
+*.csv
+
+# [Common Python ignore]
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
+*$py.class
 
 # C extensions
 *.so
