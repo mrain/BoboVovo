@@ -73,10 +73,6 @@ matches = soup(response.text, 'lxml').findAll('div', {'class': 'matchmain'})
 with open('matches_d2l', 'w') as fw:
     for match in matches:
         href = url + match.find('a').get('href')
-        #potential = []
-        #for value in half_tag:
-        #    if 'for' in value.text:
-        #        potential.append(value.text.strip()[5:8])
         matchinfo = re.split(r'[\nÂ\xa0]+', match.text.strip())
 
         notes = None
@@ -85,7 +81,7 @@ with open('matches_d2l', 'w') as fw:
         if len(matchinfo) == 6:
             t, notes, series, teamA, _, teamB = matchinfo
         s = crawl_details(href, series, notes)
-        fw.write(str(s))
+        fw.write(str(s) + '\n')
         print(str(s))
         #fw.write('{0}\t{1}\t{2}\t{3}\t{4}\t{5}\t{6}\t{7}\t{8}\n'.format(convert_time(t), event, team1[:-3], team1[-3:], potential[0], team2[:-3], team2[-3:], potential[1], note))
-        #fw.flush()
+        fw.flush()
