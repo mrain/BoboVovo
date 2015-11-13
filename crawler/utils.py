@@ -11,7 +11,7 @@ headers = {
 tbd = 'TBD'
 
 class Match(object):
-    def __init__(self, active='', matchtime='1990-01-01 00:00', webpage='', serie='', teams=(tbd, tbd), odds=(0, 0), returns=(0, 0), notes=None, winner=''):
+    def __init__(self, active='', matchtime='1990-01-01 00:00', webpage='', serie='', teams=(tbd, tbd), odds=(0, 0), returns=(0, 0), notes=None, winner='', poolsize=0, bestof=0):
         self.active = active
         self.matchtime = matchtime
         self.serie = slugify(serie)
@@ -26,6 +26,8 @@ class Match(object):
             self.returns = returns[::-1]
         self.notes = notes
         self.webpage = webpage
+        self.poolsize = poolsize
+        self.bestof = bestof
 
     def indentical(self, s):
         assert(isinstance(s, match))

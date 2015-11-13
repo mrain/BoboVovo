@@ -38,6 +38,11 @@ def crawl_details(webpage, series, notes):
     matchtime_rlt = convert_time(s.find('div', {'class': 'half', 'style': 'font-size: 0.8em;width: 33%;'}).text)
     matchtime = matchtime_rlt + timestamp
     bestof = s.find('div', {'class': 'half', 'style': 'font-size: 0.8em;text-align: center;width: 28%;'}).text[-1]
+    try:
+        poolsize = re.search('placed (?P<no>[0-9]+)', [x.text.strip() for x in s.findAll('div', {'class': 'full'}) if 'placed' in x.text][0]).group('no')
+    except:
+        print([x.text.strip() for x in s.findAll('div', {'class': 'full'}) if 'placed' in x.text][0])
+        poolsize = 0
     matchtime_abs = s.find('div', {'class': 'half', 'style': 'font-size: 0.8em;text-align: right;width: 33%;'}).text
     winner = None
     teamA = s.find('span', {'style': 'width: 45%; float: left; text-align: right'}).find('b').text
@@ -62,6 +67,8 @@ def crawl_details(webpage, series, notes):
         returns=(returnA, returnB),
         notes=notes,
         winner=winner,
+        poolsize=poolsize,
+        bestof=bestof,
         )
 
 def crawl_full():
