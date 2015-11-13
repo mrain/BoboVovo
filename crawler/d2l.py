@@ -8,7 +8,8 @@ from bs4 import BeautifulSoup as soup
 
 from .utils import headers
 from .utils import Match
-from .utils import tbd
+
+url = 'http://dota2lounge.com/'
 
 def convert_time(t):
     s = t.split()
@@ -64,7 +65,6 @@ def crawl_details(webpage, series, notes):
         )
 
 def crawl_full():
-    url = 'http://dota2lounge.com/'
     response = requests.get(url, headers=headers)
     matches = soup(response.text, 'lxml').findAll('div', {'class': 'matchmain'})
     with open('matches_d2l', 'w') as fw:
@@ -76,7 +76,6 @@ def crawl_full():
             yield s
 
 def crawl_home():
-    url = 'http://dota2lounge.com/'
     response = requests.get(url, headers=headers)
     timestamp = time.time()
     matches = soup(response.text, 'lxml').findAll('div', {'class': 'matchmain'})
