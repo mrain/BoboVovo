@@ -30,7 +30,7 @@ def convert_time(t):
         live = -1
     return absolute * multiplier * sign * 60
 
-def crawl_details(webpage, series, notes):
+def crawl_details(webpage, serie, notes):
     time.sleep(1)
     timestamp = time.time()
     response = requests.get(webpage, headers=headers)
@@ -41,7 +41,6 @@ def crawl_details(webpage, series, notes):
     try:
         poolsize = re.search('placed (?P<no>[0-9]+)', [x.text.strip() for x in s.findAll('div', {'class': 'full'}) if 'placed' in x.text][0]).group('no')
     except:
-        print([x.text.strip() for x in s.findAll('div', {'class': 'full'}) if 'placed' in x.text][0])
         poolsize = 0
     matchtime_abs = s.find('div', {'class': 'half', 'style': 'font-size: 0.8em;text-align: right;width: 33%;'}).text
     winner = None
@@ -61,7 +60,7 @@ def crawl_details(webpage, series, notes):
         active=matchtime_rlt > 0,
         matchtime=time.strftime('%Y-%m-%d %H:%M', time.localtime(matchtime_rlt + timestamp)),
         webpage=webpage,
-        serie=series,
+        serie=serie,
         teams=(teamA, teamB),
         odds=(oddA, oddB),
         returns=(returnA, returnB),
@@ -77,9 +76,9 @@ def crawl_full():
     with open('matches_d2l', 'w') as fw:
         for match in matches:
             href = url + match.find('a').get('href')
-            series = match.find('div', {'class': 'eventm'}).text
+            serie = match.find('div', {'class': 'eventm'}).text
             notes = re.sub(r'[Â\xa0]+', '', match.find('span', {'style': 'font-weight: bold; color: #D12121'}).text)
-            s = crawl_details(href, series, notes)
+            s = crawl_details(href, serie, notes)
             yield s
 
 def crawl_home():
@@ -89,7 +88,7 @@ def crawl_home():
     with open('matches_d2l', 'w') as fw:
         for match in matches:
             matchtime_rlt = convert_time(match.find('div', {'class': 'whenm'}).find(text=True, recursive=False))
-            series = match.find('div', {'class': 'eventm'}).text
+            serie = match.find('div', {'class': 'eventm'}).text
             notes = re.sub(r'[Â\xa0]+', '', match.find('span', {'style': 'font-weight: bold; color: #D12121'}).text)
             a = match.find('a')
             href = url + a.get('href')
@@ -102,7 +101,7 @@ def crawl_home():
                 active=matchtime_rlt > 0,
                 matchtime=time.strftime('%Y-%m-%d %H:%M', time.localtime(matchtime_rlt + timestamp)),
                 webpage=href,
-                serie=series,
+                serie=serie,
                 teams=(teamA, teamB),
                 odds=(oddA, oddB),
                 notes=notes,

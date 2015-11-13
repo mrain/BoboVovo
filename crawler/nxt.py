@@ -30,31 +30,33 @@ def crawl_match(match_id):
         isCompleted = True
         ticker = content.find('p', {'class': 'text-right small tickers_match_completed'})
         match_time = datetime.datetime.strptime(ticker.get('data-date-time'), '%Y,%m,%d,%H,%M,%S')
-    # Teams
+
     teamA = content.find('div', {'class': 'col-xs-6 text-center col-xs-height col-top teamA'})
     teamA_tag = teamA.find('div', {'class': 'col-xs-6 text-center'})
     teamA_name = teamA_tag.p.text.strip()
-    teamA_rate = teamA_tag.p.next_sibling.next_sibling.text.strip()
+    teamA_rate = float(teamA_tag.p.next_sibling.next_sibling.text.strip()[:-1]) / 100
     teamA_ID = teamA.find('input', {'class': 'teamID'}).get('value')
-    teamA_rewards = content.find('div', {'class': 'col-xs-6 col-md-3 text-center odds-panel-teamA'}).span.text
+    teamA_rewards = float(content.find('div', {'class': 'col-xs-6 col-md-3 text-center odds-panel-teamA'}).span.text)
     
     teamB = content.find('div', {'class': 'col-xs-6 text-center col-xs-height col-top teamB'})
     teamB_tag = teamB.find('div', {'class': 'col-xs-6 text-center'})
     teamB_name = teamB_tag.p.text.strip()
-    teamB_rate = teamB_tag.p.next_sibling.next_sibling.text.strip()
+    teamB_rate = float(teamB_tag.p.next_sibling.next_sibling.text.strip()[:-1]) / 100
     teamB_ID = teamB.find('input', {'class': 'teamID'}).get('value')
-    teamB_rewards = content.find('div', {'class': 'col-xs-6 col-md-3 text-center odds-panel-teamB'}).span.text
+    teamB_rewards = float(content.find('div', {'class': 'col-xs-6 col-md-3 text-center odds-panel-teamB'}).span.text)
 
     try:
-        bets = re.match(r"\d+", content.find('h5').text.strip()).group()
-        best_of = re.search(r"Best of (?P<haha>\d)", content.text).group('haha')
+        bets = re.match(r'\d+', content.find('h5').text.strip()).group()
     except:
-        bets = -1
-        best_of = -1
+        bets = 0
+    try:
+        best_of = re.search(r'Best of (?P<haha>\d)', content.text).group('haha')
+    except:
+        best_of = 0
     return Match(
-        active = str(isLive),
-        matchtime=str(match_time),
-        webpage=match_url+str(match_id),
+        active = isLive,
+        matchtime=datetime.datetime.strftime(match_time, '%Y-%m-%d %H:%M'),
+        webpage=match_url + str(match_id),
         serie=league,
         teams=(teamA_name, teamB_name),
         odds=(teamA_rate, teamB_rate),
@@ -63,21 +65,26 @@ def crawl_match(match_id):
         bestof=best_of
         )
 
-def crawl_match_list():
+def crawl_full():
     response = requests.get(url, headers=headers)
     content = soup(response.content, 'html.parser')
     matches = content.findAll('div', {'class': 'col-xs-12 item match-thumbnail'})
-    match_list = []
     for match in matches:
         match_id = match.a.get('id')
-        match_list.append(match_id)
-    return match_list
+        yield crawl_match(match_id)
+
+def crawl_home():
+    response = requests.get(url, headers=headers)
+    content = soup(response.content, 'html.parser')
+    matches = content.findAll('div', {'class': 'col-xs-12 item match-thumbnail'})
+    for match in matches:
+        match_id = match.a.get('id')
+        yield crawl_match(match_id)
 
 def flowtest():
     print('nxt crawler flowtest')
     print('crawling http://nxtgame.com/')
     print('Result:')
-    match_list = crawl_match_list()
-    for match_id in match_list:
-        print(crawl_match(match_id))
+    for match in crawl_full():
+        print(match)
 
