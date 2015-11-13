@@ -1,14 +1,14 @@
 import requests
 import time
-
 import re
+
 import slugify
 from lxml import etree
 from bs4 import BeautifulSoup as soup
 
-from utils import headers
-from utils import Match
-from utils import tbd
+from .utils import headers
+from .utils import Match
+from .utils import tbd
 
 def convert_time(t):
     s = t.split()
@@ -27,10 +27,9 @@ def convert_time(t):
         live = 1
     else:
         live = -1
-    return absolute * multiplier * sign
+    return absolute * multiplier * sign * 60
 
 def crawl_details(webpage, series, notes):
-    print('fetching ' + webpage)
     time.sleep(1)
     timestamp = time.time()
     response = requests.get(webpage, headers=headers)
@@ -57,31 +56,55 @@ def crawl_details(webpage, series, notes):
         matchtime=time.strftime('%Y-%m-%d %H:%M', time.localtime(matchtime_rlt + timestamp)),
         webpage=webpage,
         serie=series,
-        teams=(teamA, teamB), 
+        teams=(teamA, teamB),
         odds=(oddA, oddB),
         returns=(returnA, returnB),
         notes=notes,
         winner=winner,
         )
 
-#s = crawl_details('http://dota2lounge.com/match?m=9794', 'summit', None)
-#print(s)
+def crawl_full():
+    url = 'http://dota2lounge.com/'
+    response = requests.get(url, headers=headers)
+    matches = soup(response.text, 'lxml').findAll('div', {'class': 'matchmain'})
+    with open('matches_d2l', 'w') as fw:
+        for match in matches:
+            href = url + match.find('a').get('href')
+            series = match.find('div', {'class': 'eventm'}).text
+            notes = re.sub(r'[Â\xa0]+', '', match.find('span', {'style': 'font-weight: bold; color: #D12121'}).text)
+            s = crawl_details(href, series, notes)
+            yield s
 
-url = 'http://dota2lounge.com/'
-response = requests.get(url, headers=headers)
-matches = soup(response.text, 'lxml').findAll('div', {'class': 'matchmain'})
-with open('matches_d2l', 'w') as fw:
-    for match in matches:
-        href = url + match.find('a').get('href')
-        matchinfo = re.split(r'[\nÂ\xa0]+', match.text.strip())
+def crawl_home():
+    url = 'http://dota2lounge.com/'
+    response = requests.get(url, headers=headers)
+    timestamp = time.time()
+    matches = soup(response.text, 'lxml').findAll('div', {'class': 'matchmain'})
+    with open('matches_d2l', 'w') as fw:
+        for match in matches:
+            matchtime_rlt = convert_time(match.find('div', {'class': 'whenm'}).find(text=True, recursive=False))
+            series = match.find('div', {'class': 'eventm'}).text
+            notes = re.sub(r'[Â\xa0]+', '', match.find('span', {'style': 'font-weight: bold; color: #D12121'}).text)
+            a = match.find('a')
+            href = url + a.get('href')
+            teamtext = a.findAll('div', {'class': 'teamtext'})
+            teamA = teamtext[0].find('b').text
+            oddA = teamtext[0].find('i').text
+            teamB = teamtext[1].find('b').text
+            oddB = teamtext[1].find('i').text
+            yield Match(
+                active=matchtime_rlt > 0,
+                matchtime=time.strftime('%Y-%m-%d %H:%M', time.localtime(matchtime_rlt + timestamp)),
+                webpage=href,
+                serie=series,
+                teams=(teamA, teamB),
+                odds=(oddA, oddB),
+                notes=notes,
+                )
 
-        notes = None
-        if len(matchinfo) == 5:
-            t, series, teamA, _, teamB = matchinfo
-        if len(matchinfo) == 6:
-            t, notes, series, teamA, _, teamB = matchinfo
-        s = crawl_details(href, series, notes)
-        fw.write(str(s) + '\n')
-        print(str(s))
-        #fw.write('{0}\t{1}\t{2}\t{3}\t{4}\t{5}\t{6}\t{7}\t{8}\n'.format(convert_time(t), event, team1[:-3], team1[-3:], potential[0], team2[:-3], team2[-3:], potential[1], note))
-        fw.flush()
+def flowtest():
+    print('d2l crawler flowtest')
+    print('crawling http://dota2lounge.com/')
+    print('Result:')
+    for s in crawl_full():
+        print(s)
