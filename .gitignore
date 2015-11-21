@@ -1,4 +1,6 @@
-# [Bandit project ignores]
+# cache
+*~
+
 # csv files from movielens
 *.csv
 
