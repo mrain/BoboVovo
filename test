@@ -1,0 +1,560 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta class="viewport" name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+<title>Match #12396 / No Mercy Gaming vs TLC / The Battle Fury - Dota 2 Bestyolo - Your Dota2 Betting Hub</title><meta name="description" content="Trade and bet on competitive games your Dota 2 cosmetics items." />
+<meta name="google-site-verification" content="8mrnIyMmMk6sk54bbAoOpKZP7bzAiNzbL7Rvkj9dw6Y" />
+<meta name="google-translate-customization" content="b22b0e5660290bfa-8ce24a610057f507-g050523ce8a4774d9-12"></meta>
+<link rel="alternate" href="http://dota2bestyolo.com/index/switch-lang/lang/en" hreflang="en" />
+<link rel="alternate" href="http://dota2bestyolo.com/index/switch-lang/lang/ru" hreflang="ru" />
+<link rel="alternate" href="http://dota2bestyolo.com/index/switch-lang/lang/br" hreflang="pt-br" />
+<link rel="alternate" href="http://dota2bestyolo.com/index/switch-lang/lang/es" hreflang="es" />
+<link rel="alternate" href="http://dota2bestyolo.com/index/switch-lang/lang/cn" hreflang="cn" />
+<link href="//www.dota2bestyolo.com/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+<link rel="stylesheet" type="text/css" href="/themes/v2/css/bootstrap.css?v=6" />
+<link href="/themes/v2/css/font-awesome.css" rel="stylesheet" type="text/css" />
+<link href="/themes/v2/css/style.css?v=0" rel="stylesheet" type="text/css" />
+<link href="/themes/v2/css/dev_fix.css?v=9" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" type="text/css" href="/themes/v2/css/responsive.css?v=3" />
+<link rel="stylesheet" href="/themes/v2/css/buttons.css"/>
+<script type="text/javascript" src="/themes/v2/js/jquery.min.js?v=1"></script>
+<script type="text/javascript" src="/themes/v2/js/buttons.js"></script>
+<script type="text/javascript" src="/themes/v2/js/imagesloaded.pkgd.min.js"></script>
+<script type="text/javascript" src="/themes/v2/js/isotope.pkgd.min.js?v=2.1.0"></script>
+<script type="text/javascript" src="/themes/v2/js/ion.sound.min.js"></script>
+<script type="text/javascript" src="/themes/v2/js/noty/packaged/jquery.noty.packaged.min.js?v=1"></script>
+<script type="text/javascript" src="/themes/v2/js/noty/themes/default.js"></script>
+<script type="text/javascript" src="/themes/v2/js/jquery-ui.min.js"></script>
+<script type="text/javascript" src="/themes/v2/js/nprogress.js?v=2"></script>
+<script type="text/javascript" src="/themes/v2/js/jquery.pjax.js?v=3"></script>
+<link rel='stylesheet' href="/themes/v2/css/nprogress.css?v=2"/>
+<!--[if IE]>
+	<link rel='stylesheet' href="css/ie.css">
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+</head>
+
+
+<body>
+<div class="m-only">
+	<a class="scrollto" href="#webtop"><img src="/themes/v2/img/bets.png" /> LEFT</a>
+    <a class="scrollto" href="#right"><img src="/themes/v2/img/trade.png" /> RIGHT</a>
+</div>
+<div class="header" id="webtop">
+	<div class="top-left">
+    	<div class='logo'><a href="/" data-pjax><img src="/themes/v2/img/logo.png" /></a></div>
+    	<div class="menu">
+        	<ul>
+            	<li><a href="/my-profile.html" data-pjax><img src="/themes/v2/img/i1.png" /><span>My Profile</span></a></li>
+                <li><a href="/my-bets.html" data-pjax><img src="/themes/v2/img/i2.png" /><span>My Bets</span></a></li>
+                <li><a href="/betting-stash.html" data-pjax><img src="/themes/v2/img/i3.png" /><span>Betting Stash</span></a></li>
+                <li><a href="/ranking.html" data-pjax><img src="/themes/v2/img/ranking.png" /><span>Ranking</span></a></li>
+                <li><a href="#"><img src="/themes/v2/img/i4.png" /><span>Donation</span></a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="top-right">
+    	<div class="login">
+    					<a href="/login/" title="Login"><img src="/themes/v2/img/sign-in.png"></a>
+			        </div>
+    	<div class="color dropdown"><a data-toggle="dropdown" href="#"><img src="/themes/v2/img/color.png" width="30px" height="30px" /></a>
+        	<ul class="dropdown-menu" >
+                <li><a href="#" class="light-btn"><img src="/themes/v2/img/light-grey.png" /><span>Light</span></a></li>
+                <li><a href="#" class="dark-btn"><img src="/themes/v2/img/dark-grey.png" /><span>Dark</span></a></li>
+              </ul>
+        </div>
+    	<div class="lang dropdown"><a data-toggle="dropdown" href="#"><img src="/themes/v2/img/en.png" /></a>
+        	<ul class="dropdown-menu" >
+                <li><a href="/index/switch-lang/lang/en"><img src="/themes/v2/img/en.png" /> <span> English/US</span></a></li>
+                <li><a href="/index/switch-lang/lang/ru"><img src="/themes/v2/img/ru.png" /> <span> Russian</span></a></li>
+                <li><a href="/index/switch-lang/lang/cn"><img src="/themes/v2/img/cn.png" /> <span> Chinese</span></a></li>
+                <li><a href="/index/switch-lang/lang/br"><img src="/themes/v2/img/br.png" /> <span> Brazil</span></a></li>
+                <li><a href="/index/switch-lang/lang/es"><img src="/themes/v2/img/es.png" /> <span> Spanish</span></a></li>
+              </ul>
+
+        </div>
+    </div>
+</div>
+<div id="load">
+<noscript style="padding: 1em;margin-bottom: 1em;display: block;color: #FFF;background-color: #DA4453;text-align: center;">This website requires JavaScript to be able to work properly.</noscript>
+<div class="main-container dark-grey">
+	<!--m-container1-->
+	<div class="m-container1" id="left">
+		            <div class="title2">
+           		<span class="tt-left">Match #12396</span>
+           		<span class="tt-right">The Battle Fury</span>
+
+            </div>
+            <div class="clearfix"></div>
+       	 <div class="blk2 match">
+        	<div class="infor">
+            	<div class="time">12&nbsp;hrs ago            	</div>
+                <div class="time-right">22 Nov 2015 at 07:38 SGT</div>
+                <div class="kind-match">
+Best of 2                </div>
+            </div>
+            <div class="vs-blk">
+            	<div class="left-vs"></div>
+                <div class="main-vs">
+                	<div class="op1" style="cursor: pointer" onclick="setBetData(current_bet_mode,12396,1415, 'No Mercy Gaming', 'left_team');">
+                    	<div class="title-opt">
+                    	<h3>
+                    	<a href="#">
+							<a href="#"><span>No Mercy Gaming</span>
+						</a>
+						</h3><label class="percent">24%</label></div>
+                        <div class="avata-op">
+                        	<div class="avata">
+                            <img class="a-img" src="/uploads/No Mercy Gaming.png" id="left_team" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="vs">
+                    													<span class="result-2 rc">
+							0 : 2							</span>
+											</div>
+                    <div class="op2" style="cursor: pointer" onclick="setBetData(current_bet_mode,12396,1078, 'TLC', 'right_team');">
+                    	<div class="avata-op">
+                        	<div class="avata">
+                            	<img class="a-img" src="/uploads/6847.png" id="right_team" />
+                            </div>
+                        </div>
+                    	<div class="title-opt">
+                    	<h3>
+                    	<a href="#">
+							<a href="#"><span>TLC</span>
+						</a>
+                    	</h3> <label class="percent">76%</label></div>
+                    </div>
+
+                </div>
+                <div class="right-vs"></div>
+            </div>
+        </div>
+
+        <div class="notice none">
+        	<div class="txt-notice"></div>
+        </div>
+
+        <div class="pd-blk">
+<ul class="match-bk1-tab nav nav-tabs" role="tablist">
+<li role="presentation" class="active">
+<a href="#WL" onclick="setBetMode('WL');" role="tab" data-toggle="tab">
+Bet Final</a></li>
+</ul>
+
+        <div class="match-bk1 tab-content">
+<!-- BETMODE TAB -->
+<div class="tab-pane fade in active" id="WL" role="tabpanel">
+<div class="winner ">
+Winner:
+TLC</div>
+    <div class="reward ">
+<h4>Potiential rewards</h4>
+    	<div class="left-reward">
+        	            <div class="value-rw appid_570">
+            	<span class="value">Dota 2 Value</span><br />
+            	3.21 for 1<br />
+            	<span class="left_rw_value_WL">0</span> for <span class="left_placed_value">0</span>
+            </div>
+            <div class="value-rw appid_730">
+            	<span class="value" style="color: rgb(255, 129, 59) !important">CS:GO Value</span><br />
+            	1.10 for 1<br />
+            	<span class="left_rw_value_WL_730" style="color: rgb(255, 129, 59) !important">0</span> for <span class="left_placed_value_730" style="color: rgb(255, 129, 59) !important">0</span>
+            </div>
+    	</div>
+        <div class="right-reward">
+            <div class="value-rw appid_570">
+            	<span class="value">Dota 2 Value</span><br />
+            	0.29 for 1<br />
+            	<span class="right_rw_value_WL">0</span> for <span class="right_placed_value">0</span>
+            </div>
+            <div class="value-rw appid_730">
+            	<span class="value" style="color: rgb(255, 129, 59) !important">CS:GO Value</span><br />
+            	0.86 for 1<br />
+            	<span class="right_rw_value_WL_730" style="color: rgb(255, 129, 59) !important">0</span> for <span class="right_placed_value_730" style="color: rgb(255, 129, 59) !important">0</span>
+            </div>
+     </div>
+    </div>
+<script>
+var lt_WL_vl = 3.2082903531448;
+var rt_WL_vl = 0.29324029200718;
+var lt_WL_vl_730 = 1.0970783239832;
+var rt_WL_vl_730 = 0.85755044050473;
+var current_bet_mode = "WL";
+var current_mode = "WL";
+var current_placed_value = 0;
+var current_no_placed_item_value = 0;
+
+</script>
+</div>
+
+            </div>
+
+        </div>
+	    </div>
+    <!--end m-container1-->
+
+     <!--m-container2-->
+<div class="m-container2" id="right"></div>
+     <!--end m-container2-->
+
+</div>
+<script>
+var current_bet_appid = 570;
+
+function chooseStream(channel, mode, host) {
+    $.ajax({
+        url: '/match/stream/host/' + host + '/channel/' + channel + '/mode/' + mode,
+        success: function(data) {
+            $('#mainstream').html(data);
+        }
+    });
+}
+
+$("#slideToggle").click(function () {
+	if ($("#slideToggle").text() == "Show Chatbox") {
+		$("#slideToggle").html("Hide Chatbox");
+	} else {
+		$("#slideToggle").html("Show Chatbox");
+	}
+    $('.slideTogglebox').slideToggle();
+});
+
+$(document).ready(function() {
+	$('#betForm').ajaxForm({
+		dataType : 'json',
+		beforeSerialize : checkBetData,
+		success : processJson
+	});
+
+	
+    $.ajax({
+        url          : '/match/index-right/id/' + 12396,
+        localCache   : false,
+        cacheTTL     : 5,
+        cacheKey     : 'd2b_matchRight_' + 12396,
+        isCacheValid : function(){
+            return true;
+        },
+        success: function(data) {
+            $('#right').html(data);
+            resyncTips();
+        }
+    });
+
+    // quick search regex
+    var qsRegex;
+
+    var $container = $('.profile_item_vault').isotope({
+    	itemSelector : '.item-blk',
+    	layoutMode : 'fitRows',
+    	transitionDuration: 0,
+        filter: function() {
+            return qsRegex ? $(this).text().match( qsRegex ) : true;
+          },
+          getSortData: {
+              name: '.tip',
+              category: '[data-category]',
+              weight: function( itemElem ) {
+                  var weight = $( itemElem ).find('.weight').text();
+                  return parseFloat(weight.replace( /[\(\)]/g, ''));
+              }
+            }
+    });
+
+    // use value of search field to filter
+    var $quicksearch = $('#quicksearch').keyup( debounce( function() {
+      qsRegex = new RegExp( $quicksearch.val(), 'gi' );
+      $container.isotope();
+    }, 200 ) );
+
+    // filter functions
+    var filterFns = {};
+
+    // bind filter on select change
+    $('#filters').on('change', function() {
+    	// get filter value from option value
+    	var filterValue = this.value;
+    	// use filterFn if matches value
+    	filterValue = filterFns[filterValue] || filterValue;
+    	$container.isotope({
+    		filter : filterValue
+    	});
+    });
+
+    // debounce so filtering doesn't happen every millisecond
+    function debounce( fn, threshold ) {
+      var timeout;
+      return function debounced() {
+        if ( timeout ) {
+          clearTimeout( timeout );
+        }
+        function delayed() {
+          fn();
+          timeout = null;
+        }
+        timeout = setTimeout( delayed, threshold || 100 );
+      }
+    }
+});
+</script><div class="right-content">
+    <div class="right-blk">
+    	<div class="title-right">Match Sticker</div>
+        <ul>
+        	<li><div class="left-st">
+            	<a href="/match/12431" class="team-n" data-pjax>Fiorentina</a> <span class="per"></span>
+                </div>
+                <div class="sep"><a href="/match/12431" class="team-vs">vs</a></div>
+                <div class="right-st">
+
+                 <a href="/match/12431" class="team-n" data-pjax>Empoli</a>
+                 <span class="per"></span>
+                </div>
+            </li>
+        	<li><div class="left-st">
+            	<a href="/match/12425" class="team-n" data-pjax>Kuban</a> <span class="per"></span>
+                </div>
+                <div class="sep"><a href="/match/12425" class="team-vs">vs</a></div>
+                <div class="right-st">
+
+                 <a href="/match/12425" class="team-n" data-pjax>Terek</a>
+                 <span class="per"></span>
+                </div>
+            </li>
+        	<li><div class="left-st">
+            	<a href="/match/12417" class="team-n" data-pjax>No</a> <span class="per"></span>
+                </div>
+                <div class="sep"><a href="/match/12417" class="team-vs">vs</a></div>
+                <div class="right-st">
+
+                 <a href="/match/12417" class="team-n" data-pjax>CIS</a>
+                 <span class="per"></span>
+                </div>
+            </li>
+        	<li><div class="left-st">
+            	<a href="/match/12430" class="team-n" data-pjax>Tottenham</a> <span class="per"></span>
+                </div>
+                <div class="sep"><a href="/match/12430" class="team-vs">vs</a></div>
+                <div class="right-st">
+
+                 <a href="/match/12430" class="team-n" data-pjax>West</a>
+                 <span class="per"></span>
+                </div>
+            </li>
+        	<li><div class="left-st">
+            	<a href="/match/12421" class="team-n" data-pjax>Not</a> <span class="per"></span>
+                </div>
+                <div class="sep"><a href="/match/12421" class="team-vs">vs</a></div>
+                <div class="right-st">
+
+                 <a href="/match/12421" class="team-n" data-pjax>Kokinet</a>
+                 <span class="per"></span>
+                </div>
+            </li>
+        </ul>
+
+    	<div class="title-right">Recent Results</div>
+        <ul>
+        	<li><div class="left-st">
+            	<a href="/match/12416" class="team-n" data-pjax>Adelaide</a> <span class="per"></span>
+                </div>
+                <div class="sep">0:0</div>
+                <div class="right-st">
+
+                 <a href="/match/12416" class="team-n" data-pjax>Newcastle</a>
+                 <span class="per"></span>
+                </div>
+            </li>
+        	<li><div class="left-st">
+            	<a href="/match/12415" class="team-n" data-pjax>Suwon</a> <span class="per"></span>
+                </div>
+                <div class="sep">2:1</div>
+                <div class="right-st">
+
+                 <a href="/match/12415" class="team-n" data-pjax>Pohang</a>
+                 <span class="per"></span>
+                </div>
+            </li>
+        	<li><div class="left-st">
+            	<a href="/match/12414" class="team-n" data-pjax>Gamba</a> <span class="per"></span>
+                </div>
+                <div class="sep">4:0</div>
+                <div class="right-st">
+
+                 <a href="/match/12414" class="team-n" data-pjax>Montedio</a>
+                 <span class="per"></span>
+                </div>
+            </li>
+        	<li><div class="left-st">
+            	<a href="/match/12408" class="team-n" data-pjax>VP</a> <span class="per"></span>
+                </div>
+                <div class="sep">0:2</div>
+                <div class="right-st">
+
+                 <a href="/match/12408" class="team-n" data-pjax>Liquid</a>
+                 <span class="per"></span>
+                </div>
+            </li>
+        	<li><div class="left-st">
+            	<a href="/match/12412" class="team-n" data-pjax>Jaguares</a> <span class="per"></span>
+                </div>
+                <div class="sep">3:2</div>
+                <div class="right-st">
+
+                 <a href="/match/12412" class="team-n" data-pjax>Pachuca</a>
+                 <span class="per"></span>
+                </div>
+            </li>
+        	<li><div class="left-st">
+            	<a href="/match/12413" class="team-n" data-pjax>Morelia</a> <span class="per"></span>
+                </div>
+                <div class="sep">1:2</div>
+                <div class="right-st">
+
+                 <a href="/match/12413" class="team-n" data-pjax>Veracruz</a>
+                 <span class="per"></span>
+                </div>
+            </li>
+        	<li><div class="left-st">
+            	<a href="/match/12407" class="team-n" data-pjax>Na'Vi</a> <span class="per"></span>
+                </div>
+                <div class="sep">2:0</div>
+                <div class="right-st">
+
+                 <a href="/match/12407" class="team-n" data-pjax>Luminosity</a>
+                 <span class="per"></span>
+                </div>
+            </li>
+        	<li><div class="left-st">
+            	<a href="/match/12411" class="team-n" data-pjax>Leon</a> <span class="per"></span>
+                </div>
+                <div class="sep">3:0</div>
+                <div class="right-st">
+
+                 <a href="/match/12411" class="team-n" data-pjax>Dorados</a>
+                 <span class="per"></span>
+                </div>
+            </li>
+        	<li><div class="left-st">
+            	<a href="/match/12410" class="team-n" data-pjax>Tigres</a> <span class="per"></span>
+                </div>
+                <div class="sep">0:0</div>
+                <div class="right-st">
+
+                 <a href="/match/12410" class="team-n" data-pjax>Cruz</a>
+                 <span class="per"></span>
+                </div>
+            </li>
+        	<li><div class="left-st">
+            	<a href="/match/12396" class="team-n" data-pjax>No</a> <span class="per"></span>
+                </div>
+                <div class="sep">0:2</div>
+                <div class="right-st">
+
+                 <a href="/match/12396" class="team-n" data-pjax>TLC</a>
+                 <span class="per"></span>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div class="divide"></div>
+    <ul class="last-link">
+        <li><a href="/bet-intro.html" data-pjax>Introduction</a></li>
+        <li><a href="/rules.html" data-pjax>Rules</a></li>
+        <li><a href="/contact.html">Contact</a></li>
+    </ul>
+    <div class="social">
+        <ul>
+            <li><a href="https://www.facebook.com/Dota2BestYolo" target="_blank"><i class="fa fa-facebook"></i></a></li>
+            <li><a href="https://twitter.com/dota2bestyolo" target="_blank"><i class="fa fa-twitter"></i></a></li>
+            <li><a href="https://www.youtube.com/channel/UCjnPPqqPi8NpSt_9ScZLheg" target="_blank"><i class="fa fa-youtube"></i></a></li>
+        </ul>
+    </div>
+    <div class="poweredby" style="text-align: center; color: #888; line-height: 12px;">
+    <span>&copy; 2015</span><br />
+    <span>Powered by <a href="http://www.steampowered.com/">Steam</a></span>
+    </div>
+
+</div><script>
+$(document).ready(function() {
+																											
+	});
+
+console.log('Execution time: ' + 0.17378306388855);
+</script>
+<div style="display: none;">
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    ga('create', 'UA-49508131-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+<!-- Histats.com  (div with counter) --><div id="histats_counter"></div>
+<!-- Histats.com  START  (aync)-->
+<script type="text/javascript">var _Hasync= _Hasync|| [];
+_Hasync.push(['Histats.start', '1,2619086,4,407,118,80,00011111']);
+_Hasync.push(['Histats.fasi', '1']);
+_Hasync.push(['Histats.track_hits', '']);
+(function() {
+var hs = document.createElement('script'); hs.type = 'text/javascript'; hs.async = true;
+hs.src = ('http://s10.histats.com/js15_as.js');
+(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(hs);
+})();</script>
+<noscript><a href="http://www.histats.com" target="_blank"><img  src="http://sstatic1.histats.com/0.gif?2619086&101" alt="php hit counter" border="0"></a></noscript>
+<!-- Histats.com  END  -->
+</div>
+
+</div>
+<div class="bot_box" style="display: none;"></div>
+<script src="/themes/v2/js/bootstrap.min.js"></script>
+<script src="/themes/v2/js/twitter-bootstrap-hover-dropdown.min.js"></script>
+<script src="/themes/v2/js/fitvids.js"></script>
+<script src="/themes/v2/js/scripts.js"></script>
+
+
+<script type="text/javascript" src="/themes/v2/js/inventory.js?v=11"></script>
+<script type="text/javascript" src="/themes/v2/js/jquery.ajax.localStorage.js"></script>
+<script type="text/javascript" src="/themes/v2/js/jquery.form.min.js"></script>
+<script type="text/javascript" src="/themes/v2/js/dota2_v2.js?v=9"></script>
+<script>
+$(document).ready(function() {
+	$('#betForm').ajaxForm({
+		dataType : 'json',
+		beforeSerialize : checkBetData,
+		success : processJson,
+		error: function () { alert('Server busy. Please try again now'); }
+	});
+	$.pjax.defaults.timeout = 8000
+	$(document).pjax('a[data-pjax]', '#load', { fragment: '#load' });
+	$(document).on('pjax:beforeSend', function() {
+		NProgress.start();
+	});
+	$(document).on('pjax:complete', function() {
+		NProgress.done(true);
+		$('.show-arr').hide();
+		$('.hide-arr').click(function (e) {
+			$(this).parent().parent().parent().find('.s-h').toggle(0);
+			$(this).parent().find('.show-arr').show();
+			$(this).hide();
+	  	});
+		$('.show-arr').click(function (e) {
+			$(this).parent().parent().parent().find('.s-h').toggle(0);
+			$(this).hide();
+			$(this).parent().find('.hide-arr').show();
+	  	});
+	});
+    $(document).on('pjax:timeout', function(event) {
+      // Prevent default timeout redirection behavior
+      event.preventDefault();
+    });
+});
+</script>
+</body>
+
+</html>

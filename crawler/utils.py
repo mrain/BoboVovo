@@ -10,28 +10,37 @@ headers = {
 }
 tbd = 'TBD'
 
+def pc(x):
+    return float(x[:-1]) / 100
+
 class Match(object):
-    def __init__(self, active='', matchtime='1990-01-01 00:00', webpage='', serie='', teams=(tbd, tbd), odds=(0, 0), returns=(0, 0), notes=None, winner='', poolsize=0, bestof=0):
+    def __init__(self, active='', matchtime='1990-01-01 00:00', webpage='', series='', teams=(tbd, tbd), odds=(0, 0), returns=(0, 0), notes=None, result=(-1, -1), poolsize=-1, bestof=-1):
         self.active = active
         self.matchtime = matchtime
-        self.serie = slugify(serie)
+        self.series = slugify(series)
         teams = [slugify(team) for team in teams]
+        odds = [float(odd) for odd in odds]
+        returns = [float(_return) for _return in returns]
+        result = [float(score) for score in result]
         if teams[0] <= teams[1]:
             self.teams = teams
             self.odds = odds
             self.returns = returns
+            self.result = result
         else:
             self.teams = teams[::-1]
             self.odds = odds[::-1]
             self.returns = returns[::-1]
+            self.result = result[::-1]
         self.notes = notes
         self.webpage = webpage
-        self.poolsize = poolsize
-        self.bestof = bestof
+        self.poolsize = int(poolsize)
+        self.bestof = int(bestof)
+        self.timestamp = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime())
 
-    def indentical(self, s):
+    def __eq__(self, s):
         assert(isinstance(s, match))
-        if abs(time.mktime(self.matchtime) - time.mktime(s.matchtime)) <= 5400 and self.serie == s.serie and self.team == s.team:
+        if abs(time.mktime(self.matchtime) - time.mktime(s.matchtime)) <= 5400 and self.series == s.series and self.team == s.team:
             return True
         else:
             return False

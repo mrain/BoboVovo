@@ -8,6 +8,7 @@ from bs4 import BeautifulSoup as soup
 
 from .utils import headers
 from .utils import Match
+from .utils import pc
 
 url = 'http://www.nxtgame.com/?sports=1'
 match_url = 'http://www.nxtgame.com/match/details/'
@@ -34,14 +35,14 @@ def crawl_match(match_id):
     teamA = content.find('div', {'class': 'col-xs-6 text-center col-xs-height col-top teamA'})
     teamA_tag = teamA.find('div', {'class': 'col-xs-6 text-center'})
     teamA_name = teamA_tag.p.text.strip()
-    teamA_rate = float(teamA_tag.p.next_sibling.next_sibling.text.strip()[:-1]) / 100
+    teamA_rate = pc(teamA_tag.p.next_sibling.next_sibling.text.strip())
     teamA_ID = teamA.find('input', {'class': 'teamID'}).get('value')
     teamA_rewards = float(content.find('div', {'class': 'col-xs-6 col-md-3 text-center odds-panel-teamA'}).span.text)
     
     teamB = content.find('div', {'class': 'col-xs-6 text-center col-xs-height col-top teamB'})
     teamB_tag = teamB.find('div', {'class': 'col-xs-6 text-center'})
     teamB_name = teamB_tag.p.text.strip()
-    teamB_rate = float(teamB_tag.p.next_sibling.next_sibling.text.strip()[:-1]) / 100
+    teamB_rate = pc(teamB_tag.p.next_sibling.next_sibling.text.strip())
     teamB_ID = teamB.find('input', {'class': 'teamID'}).get('value')
     teamB_rewards = float(content.find('div', {'class': 'col-xs-6 col-md-3 text-center odds-panel-teamB'}).span.text)
 
@@ -50,14 +51,14 @@ def crawl_match(match_id):
     except:
         bets = 0
     try:
-        best_of = re.search(r'Best of (?P<haha>\d)', content.text).group('haha')
+        best_of = re.search(r'Best of (?P<bo>\d)', content.text).group('bo')
     except:
         best_of = 0
     return Match(
         active = isLive,
         matchtime=datetime.datetime.strftime(match_time, '%Y-%m-%d %H:%M'),
         webpage=match_url + str(match_id),
-        serie=league,
+        series=league,
         teams=(teamA_name, teamB_name),
         odds=(teamA_rate, teamB_rate),
         returns=(teamA_rewards, teamB_rewards),

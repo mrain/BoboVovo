@@ -11,3 +11,4 @@ with open('match.log', 'a') as fw:
     for match in chain(*[crawler.crawl_full() for crawler in all_crawlers]):
         print(match)
         fw.write(match.__str__() + '\n')
+        fw.flush()
