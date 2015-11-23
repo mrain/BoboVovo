@@ -3,7 +3,6 @@ import time
 import re
 
 import slugify
-from lxml import etree
 from bs4 import BeautifulSoup as soup
 
 from .utils import headers

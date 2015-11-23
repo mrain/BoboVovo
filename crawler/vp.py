@@ -9,32 +9,29 @@ from .utils import headers
 from .utils import Match
 from .utils import pc
 
-url = 'http://dota2bestyolo.com/'
+url = 'http://dota2.vpgame.com'
 
 def convert_time(t):
-    s = t.split()
+    if t.strip() == 'Live':
+        return 0
+    s = t.strip().split()
     absolute = int(s[0])
-    if s[1] in {'min', 'mins'}:
+    if s[1] in {'m'}:
         multiplier = 1
-    elif s[1] in {'hr', 'hrs'}:
+    elif s[1] in {'h'}:
         multiplier = 60
-    elif s[1] in {'day', 'days'}:
+    elif s[1] in {'d'}:
         multiplier = 1440
-    if s[2] == 'ago':
-        sign = -1
-    elif s[2] == 'from':
-        sign = 1
-    if len(s) >= 4 and s[3] == 'LIVE':
-        live = 1
-    else:
-        live = -1
-    return absolute * multiplier * sign * 60
+    return absolute * multiplier * 60
 
 def crawl_details(webpage):
     time.sleep(1)
     timestamp = time.time()
     response = requests.get(webpage, headers=headers)
     s = soup(response.text, 'lxml')
+    print(webpage)
+    poolsize = s.find('div', {'class': 'spinach-item-tt'}).get_text(text=True, recursive=False)
+    print(poolsize)
     series = s.find('span', {'class': 'tt-right'}).text
     matchtime_rlt = convert_time(s.find('div', {'class': 'time'}).text)
     bestof = s.find('div', {'class': 'kind-match'}).text.strip()[-1]
@@ -64,42 +61,46 @@ def crawl_details(webpage):
         )
 
 def crawl_full():
-    response = requests.get(url, headers=headers)
-    matches = soup(response.text, 'lxml').findAll('div', {'class': 'blk2'})
-    for match in matches:
-        series = match.find('div', {'class': 'series'}).text
-        if series.startswith('*'): # which indicates non-dota2 series/match
-            continue
-        href = url + match.find('div', {'class': 'view-btn'}).find('a').get('href')[1:]
-        s = crawl_details(href)
-        yield s
+    page = 1
+    while True:
+        params = {'page': page}
+        response = requests.get(url + '/home/index.html', headers=headers, params=params)
+        timestamp = time.time()
+        matches = soup(response.text, 'lxml').find('div', {'class': 'items'}).findAll('a')
+        for match in matches:
+            if not 'dota2-icon' in match.find('i').get('class'):
+                continue
+            href = url + match.get('href')
+            yield crawl_details(href)
+        if len(matches) < 10:
+            break
+        page += 1
 
 def crawl_home():
-    response = requests.get(url, headers=headers)
-    timestamp = time.time()
-    matches = soup(response.text, 'lxml').findAll('div', {'class': 'blk2'})
-    for match in matches:
-        series = match.find('div', {'class': 'series'}).text
-        if series.startswith('*'): # which indicates non-dota2 series/match
-            continue
-        matchtime_rlt = convert_time(match.find('div', {'class': 'time'}).find(text=True, recursive=False))
-        teamA = match.find('div', {'class': 'title-opt'}).find('h3').text
-        oddA = pc(match.find('div', {'class': 'title-opt'}).find('label', {'class': 'percent'}).text)
-        teamB = match.find('div', {'class': 'title-opt right-bg'}).find('h3').text
-        oddB = pc(match.find('div', {'class': 'title-opt right-bg'}).find('label', {'class': 'percent'}).text)
-        href = url + match.find('div', {'class': 'view-btn'}).find('a').get('href')[1:]
-        yield Match(
-            active=matchtime_rlt > 0,
-            matchtime=time.strftime('%Y-%m-%d %H:%M', time.localtime(matchtime_rlt + timestamp)),
-            webpage=href,
-            series=series,
-            teams=(teamA, teamB),
-            odds=(oddA, oddB),
-            notes=None,
-            )
+    page = 1
+    while True:
+        params = {'page': page}
+        response = requests.get(url + '/home/index.html', headers=headers, params=params)
+        timestamp = time.time()
+        matches = soup(response.text, 'lxml').find('div', {'class': 'items'}).findAll('a')
+        for match in matches:
+            if not 'dota2-icon' in match.find('i').get('class'):
+                continue
+            series = match.find('span', {'class': 'spinach-league'}).text
+            href = url + match.get('href')
+            matchtime_rlt = convert_time(match.find('div', {'class': 'pull-right spinach-league-right'}).text)
+            yield Match(
+                active=matchtime_rlt > 0,
+                matchtime=time.strftime('%Y-%m-%d %H:%M', time.localtime(matchtime_rlt + timestamp)),
+                webpage=href,
+                series=series,
+                )
+        if len(matches) < 10:
+            break
+        page += 1
 
 def flowtest():
-    print('yolo crawler flowtest')
+    print('vp crawler flowtest')
     print('crawling http://dota2bestyolo.com/')
     print('Result:')
     for s in crawl_full():
