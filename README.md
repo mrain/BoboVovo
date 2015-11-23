@@ -6,7 +6,7 @@ Stranger, welcome to the best ~~bontting~~research project on earth.
 
 * python
 * beautifulsoup4 from pip/conda, with lxml parser
-* back-up with html5lib parser, if deemed needed
+* back-up with html5lib parser, if deemed necessary
 * python-slugify from pip/conda
 * a wooden desktop with a plastic keyboard
    

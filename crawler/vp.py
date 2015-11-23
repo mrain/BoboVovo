@@ -1,9 +1,13 @@
+# -*- coding: utf-8 -*-
+
 import requests
 import time
 import re
 
 import slugify
 from bs4 import BeautifulSoup as soup
+from calendar import month_abbr as month
+month = list(month)
 
 from .utils import headers
 from .utils import Match
@@ -12,52 +16,43 @@ from .utils import pc
 url = 'http://dota2.vpgame.com'
 
 def convert_time(t):
-    if t.strip() == 'Live':
-        return 0
-    s = t.strip().split()
-    absolute = int(s[0])
-    if s[1] in {'m'}:
-        multiplier = 1
-    elif s[1] in {'h'}:
-        multiplier = 60
-    elif s[1] in {'d'}:
-        multiplier = 1440
-    return absolute * multiplier * 60
+    g = re.match('Schedule : (?P<dd>[0-9]{2})[a-z]{2} (?P<month_abbr>[a-zA-z]{3}) , (?P<yyyy>[0-9]{4}) (?P<hh>[0-9]{2}):(?P<mm>[0-9]{2}):(?P<ss>[0-9]{2})', t.strip())
+    return '{0}-{1}-{2} {3}:{4}'.format(g.group('yyyy'), month.index(g.group('month_abbr')), g.group('dd'), g.group('hh'), g.group('mm'))
 
-def crawl_details(webpage):
+def crawl_details(webpage, series, notes):
     time.sleep(1)
     timestamp = time.time()
     response = requests.get(webpage, headers=headers)
+    with open('test','w') as fw:
+        fw.write(response.text)
     s = soup(response.text, 'lxml')
-    print(webpage)
-    poolsize = s.find('div', {'class': 'spinach-item-tt'}).get_text(text=True, recursive=False)
-    print(poolsize)
-    series = s.find('span', {'class': 'tt-right'}).text
-    matchtime_rlt = convert_time(s.find('div', {'class': 'time'}).text)
-    bestof = s.find('div', {'class': 'kind-match'}).text.strip()[-1]
-    teamA = s.find('div', {'class': 'op1'}).find('span').text
-    oddA = pc(s.find('div', {'class': 'op1'}).find('label', {'class': 'percent'}).text)
-    teamB = s.find('div', {'class': 'op2'}).find('span').text
-    oddB = pc(s.find('div', {'class': 'op2'}).find('label', {'class': 'percent'}).text)
-    returnA = s.find('div', {'class': 'left-reward'}).find('div', {'class': 'value-rw appid_570'}).text
-    returnA = re.search('(?P<return>[0-9\.]+) for 1', returnA).group('return')
-    returnB = s.find('div', {'class': 'right-reward'}).find('div', {'class': 'value-rw appid_570'}).text
-    returnB = re.search('(?P<return>[0-9\.]+) for 1', returnB).group('return')
-    if s.find('span', {'class': 'result-2 rc'}):
-        z = re.search('(?P<scoreA>[0-9]) : (?P<scoreB>[0-9])', s.find('span', {'class': 'result-2 rc'}).text)
-        result = (int(z.group('scoreA')), int(z.group('scoreB')))
+    poolsize = int(''.join(s.find('div', {'class': 'spinach-item-tt'}).find_all(text=True,recursive=False)).strip())
+    matchtime = convert_time(s.find('p', {'class': 'pull-right'}).find('span', {'class': 'mr-5'}).text)
+    bestof = int(s.find('span', {'class': 'f-14'}).text.strip()[-1])
+    teams = [x.find('p', {'class': 'spinach-corps-name ellipsis'}).text.strip() for x in s.find_all('div', {'class': 'spinach-corps-data'})]
+    odds = [pc(x.text.strip()) for x in s.find_all('p', {'class': 'text-center f-14 mt-5'})]
+    returns = [x.find('span', {'class': 'vp-item-odds'}).text.strip() for x in s.find_all('div', {'class': 'spinach-corps-data'})]
+    result = (-1, -1)
+    status = s.find('p', {'class': 'pull-right'}).text
+    if 'Cleared' in status:
+        result = s.find('span', {'class': 'spinach-team-score'}).text.strip().split(':')
+        active = False
+    elif 'Cancel' in status or 'live' in status or 'Live' in status:
+        active = False
     else:
-        result = (-1, -1)
+        active = True
     return Match(
-        active=matchtime_rlt > 0,
-        matchtime=time.strftime('%Y-%m-%d %H:%M', time.localtime(matchtime_rlt + timestamp)),
+        active=active,
+        matchtime=matchtime,
         webpage=webpage,
         series=series,
-        teams=(teamA, teamB),
-        odds=(oddA, oddB),
-        returns=(returnA, returnB),
+        teams=teams,
+        odds=odds,
+        returns=returns,
         result=result,
+        poolsize=poolsize,
         bestof=bestof,
+        notes=notes,
         )
 
 def crawl_full():
@@ -70,8 +65,13 @@ def crawl_full():
         for match in matches:
             if not 'dota2-icon' in match.find('i').get('class'):
                 continue
+            series = match.find('span', {'class': 'spinach-league'}).text.strip().split('【')[0]
+            try:
+                notes = match.find('span', {'class': 'spinach-league'}).text.strip().split('【')[1][:-1]
+            except IndexError:
+                notes = None
             href = url + match.get('href')
-            yield crawl_details(href)
+            yield crawl_details(href, series, notes)
         if len(matches) < 10:
             break
         page += 1
@@ -86,7 +86,7 @@ def crawl_home():
         for match in matches:
             if not 'dota2-icon' in match.find('i').get('class'):
                 continue
-            series = match.find('span', {'class': 'spinach-league'}).text
+            series = match.find('span', {'class': 'spinach-league'}).text.strip().split('【')[0]
             href = url + match.get('href')
             matchtime_rlt = convert_time(match.find('div', {'class': 'pull-right spinach-league-right'}).text)
             yield Match(
@@ -101,7 +101,8 @@ def crawl_home():
 
 def flowtest():
     print('vp crawler flowtest')
-    print('crawling http://dota2bestyolo.com/')
+    print('crawling http://dota2.vpgame.com')
     print('Result:')
+    print(crawl_details('http://dota2.vpgame.com/guess-match-118525.html', 'test', 'test'))
     for s in crawl_full():
         print(s)

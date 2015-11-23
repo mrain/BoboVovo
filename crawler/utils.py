@@ -19,9 +19,12 @@ class Match(object):
         self.matchtime = matchtime
         self.series = slugify(series)
         teams = [slugify(team) for team in teams]
+        for i in range(len(teams)):
+            if 'tbd' in teams[i] or 'TBD' in teams[i]:
+                teams[i] = tbd
         odds = [float(odd) for odd in odds]
         returns = [float(_return) for _return in returns]
-        result = [float(score) for score in result]
+        result = [int(score) for score in result]
         if teams[0] <= teams[1]:
             self.teams = teams
             self.odds = odds
