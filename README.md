@@ -15,3 +15,7 @@ Stranger, welcome to the best ~~bontting~~research project on earth.
 * notificer
 * collector
 * pesticide to save our wooden desktop
+
+## Reference
+
+* [Pros and Cons](https://www.reddit.com/r/Dota2Betting/comments/3lv98l/pros_and_cons_of_each_betting_site/)

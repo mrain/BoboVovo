@@ -44,13 +44,20 @@ def crawl_details(webpage):
     oddB = pc(s.find('div', {'class': 'op2'}).find('label', {'class': 'percent'}).text)
     returnA = s.find('div', {'class': 'left-reward'}).find('div', {'class': 'value-rw appid_570'}).text
     returnA = re.search('(?P<return>[0-9\.]+) for 1', returnA).group('return')
+    try:
+        float(returnA)
+    except ValueError:
+        returnA = -1
     returnB = s.find('div', {'class': 'right-reward'}).find('div', {'class': 'value-rw appid_570'}).text
     returnB = re.search('(?P<return>[0-9\.]+) for 1', returnB).group('return')
+    try:
+        float(returnB)
+    except ValueError:
+        returnB = -1
+    result = (-1, -1)
     if s.find('span', {'class': 'result-2 rc'}):
-        z = re.search('(?P<scoreA>[0-9]) : (?P<scoreB>[0-9])', s.find('span', {'class': 'result-2 rc'}).text)
-        result = (int(z.group('scoreA')), int(z.group('scoreB')))
-    else:
-        result = (-1, -1)
+        if not '' in s.find('span', {'class': 'result-2 rc'}).text.strip().split(':'):
+            result = s.find('span', {'class': 'result-2 rc'}).text.strip().split(':')
     return Match(
         active=matchtime_rlt > 0,
         matchtime=time.strftime('%Y-%m-%d %H:%M', time.localtime(matchtime_rlt + timestamp)),

@@ -14,7 +14,7 @@ def pc(x):
     return float(x[:-1]) / 100
 
 class Match(object):
-    def __init__(self, active='', matchtime='1990-01-01 00:00', webpage='', series='', teams=(tbd, tbd), odds=(0, 0), returns=(0, 0), notes=None, result=(-1, -1), poolsize=-1, bestof=-1):
+    def __init__(self, active='', matchtime='1990-01-01 00:00', webpage='', series='', teams=(tbd, tbd), odds=(-1, -1), returns=(-1, -1), notes=None, result=(-1, -1), poolsize=-1, bestof=-1):
         self.active = active
         self.matchtime = matchtime
         self.series = slugify(series)

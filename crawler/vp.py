@@ -23,8 +23,6 @@ def crawl_details(webpage, series, notes):
     time.sleep(1)
     timestamp = time.time()
     response = requests.get(webpage, headers=headers)
-    with open('test','w') as fw:
-        fw.write(response.text)
     s = soup(response.text, 'lxml')
     poolsize = int(''.join(s.find('div', {'class': 'spinach-item-tt'}).find_all(text=True,recursive=False)).strip())
     matchtime = convert_time(s.find('p', {'class': 'pull-right'}).find('span', {'class': 'mr-5'}).text)

@@ -7,7 +7,7 @@ all_crawlers = [globals()[crawler] for crawler in all_crawlers]
 
 inactive = json.load(open('inactive.log'))
 
-with open('match.log', 'a') as fw:
+with open('match.log', 'w') as fw:
     for match in chain(*[crawler.crawl_full() for crawler in all_crawlers]):
         print(match)
         fw.write(match.__str__() + '\n')
