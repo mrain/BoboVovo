@@ -74,6 +74,9 @@ def crawl_full():
     response = requests.get(url, headers=headers)
     matches = soup(response.text, 'lxml').findAll('div', {'class': 'blk2'})
     for match in matches:
+        matchtime_rlt = convert_time(match.find('div', {'class': 'time'}).find(text=True, recursive=False))
+        if matchtime_rlt < -3600:
+            continue
         series = match.find('div', {'class': 'series'}).text
         if series.startswith('*'): # which indicates non-dota2 series/match
             continue
