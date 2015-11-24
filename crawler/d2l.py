@@ -58,8 +58,14 @@ def crawl_details(webpage, series, notes):
         teamB = teamB[:-6]
         scoreB = int(bestof / 2) + 1
     oddB = pc(s.find('span', {'style': 'width: 45%; float: left; text-align: left'}).find('i').text)
-    returnA = 1 + float(s.find('div', {'style': 'float: left; margin: 0.25em 2%;'}).text[5:-6])
-    returnB = 1 + float(s.find('div', {'style': 'float: right; margin: 0.25em 2%;'}).text[5:-6])
+    if s.find('div', {'style': 'float: left; margin: 0.25em 2%;'}):
+        returnA = 1 + float(s.find('div', {'style': 'float: left; margin: 0.25em 2%;'}).text[5:-6])
+    else:
+        returnA = -1
+    if s.find('div', {'style': 'float: right; margin: 0.25em 2%;'}):
+        returnB = 1 + float(s.find('div', {'style': 'float: right; margin: 0.25em 2%;'}).text[5:-6])
+    else:
+        returnB = -1
     return Match(
         active=matchtime_rlt > 0,
         matchtime=time.strftime('%Y-%m-%d %H:%M', time.localtime(matchtime_rlt + timestamp)),
