@@ -55,7 +55,7 @@ def crawl_match(match_id):
     except:
         best_of = 0
     return Match(
-        active = isLive,
+        active = not isLive,
         matchtime=datetime.datetime.strftime(match_time, '%Y-%m-%d %H:%M'),
         webpage=match_url + str(match_id),
         series=league,
