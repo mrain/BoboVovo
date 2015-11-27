@@ -38,15 +38,15 @@ def crawl_match(match_id):
     teamA_name = teamA_tag.p.text.strip()
     teamA_rate = pc(teamA_tag.p.next_sibling.next_sibling.text.strip())
     teamA_ID = teamA.find('input', {'class': 'teamID'}).get('value')
-    teamA_rewards = 1 + float(content.find('div', {'class': 'col-xs-6 col-md-3 text-center odds-panel-teamA'}).span.text)
+    teamA_rewards = content.find('div', {'class': 'col-xs-6 col-md-3 text-center odds-panel-teamA'}).span.text
     
     teamB = content.find('div', {'class': 'col-xs-6 text-center col-xs-height col-top teamB'})
     teamB_tag = teamB.find('div', {'class': 'col-xs-6 text-center'})
     teamB_name = teamB_tag.p.text.strip()
     teamB_rate = pc(teamB_tag.p.next_sibling.next_sibling.text.strip())
     teamB_ID = teamB.find('input', {'class': 'teamID'}).get('value')
-    teamB_rewards = 1 + float(content.find('div', {'class': 'col-xs-6 col-md-3 text-center odds-panel-teamB'}).span.text)
-
+    teamB_rewards = content.find('div', {'class': 'col-xs-6 col-md-3 text-center odds-panel-teamB'}).span.text
+    
     try:
         bets = re.match(r'\d+', content.find('h5').text.strip()).group()
     except:
@@ -62,7 +62,7 @@ def crawl_match(match_id):
         series=league,
         teams=(teamA_name, teamB_name),
         odds=(teamA_rate, teamB_rate),
-        returns=(teamA_rewards, teamB_rewards),
+        returns=(float(teamA_rewards) + 1.0, float(teamB_rewards) + 1.0),
         poolsize=bets,
         bestof=best_of,
         tostart=(match_time - datetime.datetime.now()).total_seconds(),

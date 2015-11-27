@@ -34,6 +34,9 @@ def crawl_details(webpage):
     time.sleep(1)
     timestamp = time.time()
     response = requests.get(webpage, headers=headers)
+    response2 = requests.get('http://dota2bestyolo.com/match/index-right/id/{0}'.format(webpage.split('/')[-1]))
+    p = re.search('>(?P<pool>[0-9]*) items has been placed', response2.text)
+    poolsize = int(p.group('pool'))
     s = soup(response.text, 'lxml')
     series = s.find('span', {'class': 'tt-right'}).text
     matchtime_rlt = convert_time(s.find('div', {'class': 'time'}).text)
@@ -45,13 +48,13 @@ def crawl_details(webpage):
     returnA = s.find('div', {'class': 'left-reward'}).find('div', {'class': 'value-rw appid_570'}).text
     returnA = re.search('(?P<return>[0-9\.]+) for 1', returnA).group('return')
     try:
-        returnA = 1 + float(returnA)
+        returnA = float(returnA) + 1.0
     except ValueError:
         returnA = -1
     returnB = s.find('div', {'class': 'right-reward'}).find('div', {'class': 'value-rw appid_570'}).text
     returnB = re.search('(?P<return>[0-9\.]+) for 1', returnB).group('return')
     try:
-        returnB = 1 + float(returnB)
+        returnB = float(returnB) + 1.0
     except ValueError:
         returnB = -1
     result = (-1, -1)
@@ -68,7 +71,8 @@ def crawl_details(webpage):
         returns=(returnA, returnB),
         result=result,
         bestof=bestof,
-        tostart=matchtime_rlt
+        poolsize=poolsize,
+        tostart=matchtime_rlt,
         )
 
 def crawl_full():
