@@ -32,7 +32,7 @@ class Match(object):
             if 'tbd' in teams[i] or 'TBD' in teams[i]:
                 teams[i] = tbd
         odds = [float(odd) for odd in odds]
-        returns = [float(_return) for _return in returns]
+        returns = [float("{0:.2f}".format(float(_return))) for _return in returns]
         result = [int(score) for score in result]
         if teams[0] <= teams[1]:
             self.teams = teams

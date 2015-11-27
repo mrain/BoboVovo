@@ -18,8 +18,6 @@ url = 'http://dota2.vpgame.com'
 
 def convert_time(t):
     g = re.match('Schedule : (?P<dd>[0-9]{2})[a-z]{2} (?P<month_abbr>[a-zA-z]{3}) , (?P<yyyy>[0-9]{4}) (?P<hh>[0-9]{2}):(?P<mm>[0-9]{2}):(?P<ss>[0-9]{2})', t.strip())
-    print(t)
-    print('{0}-{1}-{2} {3}:{4}'.format(g.group('yyyy'), month.index(g.group('month_abbr')), g.group('dd'), g.group('hh'), g.group('mm')))
     return '{0}-{1}-{2} {3}:{4}'.format(g.group('yyyy'), month.index(g.group('month_abbr')), g.group('dd'), g.group('hh'), g.group('mm'))
 
 def crawl_details(webpage, series, notes):

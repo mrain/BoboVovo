@@ -47,7 +47,7 @@ def crawl_details(webpage, series, notes):
         bestof = int(botext[-1])
     try:
         poolsize = re.search('placed (?P<no>[0-9]+)', [x.text.strip() for x in s.findAll('div', {'class': 'full'}) if 'placed' in x.text][0]).group('no')
-    except:
+    except Exception:
         poolsize = 0
     matchtime_abs = s.find('div', {'class': 'half', 'style': 'font-size: 0.8em;text-align: right;width: 33%;'}).text
     scoreA, scoreB = (-1, -1)
@@ -94,11 +94,7 @@ def crawl_full():
         href = url + match.find('a').get('href')
         series = match.find('div', {'class': 'eventm'}).text
         notes = re.sub(r'[Â\xa0]+', '', match.find('span', {'style': 'font-weight: bold; color: #D12121'}).text)
-        try:
-            s = crawl_details(href, series, notes)
-        except:
-            print('d2l error happened')
-            break
+        s = crawl_details(href, series, notes)
         yield s
 
 def crawl_home():
