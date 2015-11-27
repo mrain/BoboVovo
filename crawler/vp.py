@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import requests
+import datetime
 import time
 import re
 
@@ -17,6 +18,8 @@ url = 'http://dota2.vpgame.com'
 
 def convert_time(t):
     g = re.match('Schedule : (?P<dd>[0-9]{2})[a-z]{2} (?P<month_abbr>[a-zA-z]{3}) , (?P<yyyy>[0-9]{4}) (?P<hh>[0-9]{2}):(?P<mm>[0-9]{2}):(?P<ss>[0-9]{2})', t.strip())
+    print(t)
+    print('{0}-{1}-{2} {3}:{4}'.format(g.group('yyyy'), month.index(g.group('month_abbr')), g.group('dd'), g.group('hh'), g.group('mm')))
     return '{0}-{1}-{2} {3}:{4}'.format(g.group('yyyy'), month.index(g.group('month_abbr')), g.group('dd'), g.group('hh'), g.group('mm'))
 
 def crawl_details(webpage, series, notes):
@@ -26,10 +29,11 @@ def crawl_details(webpage, series, notes):
     s = soup(response.text, 'lxml')
     poolsize = int(''.join(s.find('div', {'class': 'spinach-item-tt'}).find_all(text=True,recursive=False)).strip())
     matchtime = convert_time(s.find('p', {'class': 'pull-right'}).find('span', {'class': 'mr-5'}).text)
+    matchtime_datetime = datetime.datetime.strptime(matchtime, '%Y-%m-%d %H:%M')
     bestof = int(s.find('span', {'class': 'f-14'}).text.strip()[-1])
     teams = [x.find('p', {'class': 'spinach-corps-name ellipsis'}).text.strip() for x in s.find_all('div', {'class': 'spinach-corps-data'})]
     odds = [pc(x.text.strip()) for x in s.find_all('p', {'class': 'text-center f-14 mt-5'})]
-    returns = [x.find('span', {'class': 'vp-item-odds'}).text.strip() for x in s.find_all('div', {'class': 'spinach-corps-data'})]
+    returns = [1 + float(x.find('span', {'class': 'vp-item-odds'}).text.strip()) for x in s.find_all('div', {'class': 'spinach-corps-data'})]
     result = (-1, -1)
     status = s.find('p', {'class': 'pull-right'}).text
     if 'Cleared' in status:
@@ -51,6 +55,7 @@ def crawl_details(webpage, series, notes):
         poolsize=poolsize,
         bestof=bestof,
         notes=notes,
+        tostart=(matchtime_datetime - datetime.datetime.now()).total_seconds(),
         )
 
 def crawl_full():

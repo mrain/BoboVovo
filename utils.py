@@ -1,7 +1,7 @@
 from os.path import join
 
-def matchfile(s):
+def matchfile(s, mode='a'):
     webpage = s.webpage.replace('/', '$')
-    return open(join('matches', webpage), 'a')
+    return open(join('matches', webpage), mode)
 
 

@@ -31,20 +31,21 @@ def crawl_match(match_id):
         isCompleted = True
         ticker = content.find('p', {'class': 'text-right small tickers_match_completed'})
         match_time = datetime.datetime.strptime(ticker.get('data-date-time'), '%Y,%m,%d,%H,%M,%S')
-
+    else:
+        return None
     teamA = content.find('div', {'class': 'col-xs-6 text-center col-xs-height col-top teamA'})
     teamA_tag = teamA.find('div', {'class': 'col-xs-6 text-center'})
     teamA_name = teamA_tag.p.text.strip()
     teamA_rate = pc(teamA_tag.p.next_sibling.next_sibling.text.strip())
     teamA_ID = teamA.find('input', {'class': 'teamID'}).get('value')
-    teamA_rewards = float(content.find('div', {'class': 'col-xs-6 col-md-3 text-center odds-panel-teamA'}).span.text)
+    teamA_rewards = 1 + float(content.find('div', {'class': 'col-xs-6 col-md-3 text-center odds-panel-teamA'}).span.text)
     
     teamB = content.find('div', {'class': 'col-xs-6 text-center col-xs-height col-top teamB'})
     teamB_tag = teamB.find('div', {'class': 'col-xs-6 text-center'})
     teamB_name = teamB_tag.p.text.strip()
     teamB_rate = pc(teamB_tag.p.next_sibling.next_sibling.text.strip())
     teamB_ID = teamB.find('input', {'class': 'teamID'}).get('value')
-    teamB_rewards = float(content.find('div', {'class': 'col-xs-6 col-md-3 text-center odds-panel-teamB'}).span.text)
+    teamB_rewards = 1 + float(content.find('div', {'class': 'col-xs-6 col-md-3 text-center odds-panel-teamB'}).span.text)
 
     try:
         bets = re.match(r'\d+', content.find('h5').text.strip()).group()
@@ -63,7 +64,8 @@ def crawl_match(match_id):
         odds=(teamA_rate, teamB_rate),
         returns=(teamA_rewards, teamB_rewards),
         poolsize=bets,
-        bestof=best_of
+        bestof=best_of,
+        tostart=(match_time - datetime.datetime.now()).total_seconds(),
         )
 
 def crawl_full():
@@ -72,7 +74,9 @@ def crawl_full():
     matches = content.findAll('div', {'class': 'col-xs-12 item match-thumbnail'})
     for match in matches:
         match_id = match.a.get('id')
-        yield crawl_match(match_id)
+        s = crawl_match(match_id)
+        if s:
+            yield s
 
 def crawl_home():
     response = requests.get(url, headers=headers)

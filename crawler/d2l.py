@@ -31,9 +31,12 @@ def convert_time(t):
     return absolute * multiplier * sign * 60
 
 def crawl_details(webpage, series, notes):
-    time.sleep(1)
+    time.sleep(2)
     timestamp = time.time()
     response = requests.get(webpage, headers=headers)
+    if 'nyx nyx' in response.text:
+        time.sleep(15)
+        assert(0)
     s = soup(response.text, 'lxml')
     matchtime_rlt = convert_time(s.find('div', {'class': 'half', 'style': 'font-size: 0.8em;width: 33%;'}).text)
     matchtime = matchtime_rlt + timestamp
@@ -78,6 +81,7 @@ def crawl_details(webpage, series, notes):
         result=(scoreA, scoreB),
         poolsize=poolsize,
         bestof=bestof,
+        tostart=matchtime_rlt,
         )
 
 def crawl_full():
@@ -90,7 +94,11 @@ def crawl_full():
         href = url + match.find('a').get('href')
         series = match.find('div', {'class': 'eventm'}).text
         notes = re.sub(r'[Â\xa0]+', '', match.find('span', {'style': 'font-weight: bold; color: #D12121'}).text)
-        s = crawl_details(href, series, notes)
+        try:
+            s = crawl_details(href, series, notes)
+        except:
+            print('d2l error happened')
+            break
         yield s
 
 def crawl_home():

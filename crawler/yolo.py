@@ -45,13 +45,13 @@ def crawl_details(webpage):
     returnA = s.find('div', {'class': 'left-reward'}).find('div', {'class': 'value-rw appid_570'}).text
     returnA = re.search('(?P<return>[0-9\.]+) for 1', returnA).group('return')
     try:
-        float(returnA)
+        returnA = 1 + float(returnA)
     except ValueError:
         returnA = -1
     returnB = s.find('div', {'class': 'right-reward'}).find('div', {'class': 'value-rw appid_570'}).text
     returnB = re.search('(?P<return>[0-9\.]+) for 1', returnB).group('return')
     try:
-        float(returnB)
+        returnB = 1 + float(returnB)
     except ValueError:
         returnB = -1
     result = (-1, -1)
@@ -68,6 +68,7 @@ def crawl_details(webpage):
         returns=(returnA, returnB),
         result=result,
         bestof=bestof,
+        tostart=matchtime_rlt
         )
 
 def crawl_full():
