@@ -49,7 +49,7 @@ class Match(object):
         self.poolsize = int(poolsize)
         self.bestof = int(bestof)
         self.timestamp = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime())
-        self.tostart = tostart
+        self.tostart = int(tostart)
 
     def __eq__(self, s):
         assert(isinstance(s, match))
