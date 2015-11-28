@@ -36,6 +36,8 @@ def crawl_match(match_id):
     teamA = content.find('div', {'class': 'col-xs-6 text-center col-xs-height col-top teamA'})
     teamA_tag = teamA.find('div', {'class': 'col-xs-6 text-center'})
     teamA_name = teamA_tag.p.text.strip()
+    if 'To Be Decided' in teamA_name:
+        teamA_name = 'TBD'
     teamA_rate = pc(teamA_tag.p.next_sibling.next_sibling.text.strip())
     teamA_ID = teamA.find('input', {'class': 'teamID'}).get('value')
     teamA_rewards = content.find('div', {'class': 'col-xs-6 col-md-3 text-center odds-panel-teamA'}).span.text
@@ -43,6 +45,8 @@ def crawl_match(match_id):
     teamB = content.find('div', {'class': 'col-xs-6 text-center col-xs-height col-top teamB'})
     teamB_tag = teamB.find('div', {'class': 'col-xs-6 text-center'})
     teamB_name = teamB_tag.p.text.strip()
+    if 'To Be Decided' in teamB_name:
+        teamB_name = 'TBD'
     teamB_rate = pc(teamB_tag.p.next_sibling.next_sibling.text.strip())
     teamB_ID = teamB.find('input', {'class': 'teamID'}).get('value')
     teamB_rewards = content.find('div', {'class': 'col-xs-6 col-md-3 text-center odds-panel-teamB'}).span.text
