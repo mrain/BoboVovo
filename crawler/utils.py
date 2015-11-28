@@ -52,9 +52,9 @@ class Match(object):
         self.tostart = int(tostart)
 
     def __eq__(self, s):
-        assert(isinstance(s, match))
+        assert(isinstance(s, Match))
         assert(not tbd in self.teams and not tbd in s.teams)
-        if abs(time.mktime(self.matchtime) - time.mktime(s.matchtime)) <= 3605 and close(self.series, s.series) and close(self.teams, s.teams):
+        if close(self.series, s.series) and close(self.teams, s.teams):
             return True
         else:
             return False
