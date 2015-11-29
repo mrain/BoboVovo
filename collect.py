@@ -12,7 +12,7 @@ from utils import matchfile
 from utils import domain
 
 cooldown = {crawler:0 for crawler in all_crawlers}
-cd = 175
+cd = 95
 
 while True:
     pool = []
@@ -29,14 +29,14 @@ while True:
             sys.exit(0)
         except Exception:
             cooldown[crawler] = time.time() + cd
-            cd += 1
             print('{0} cooldowned for {1}s for exception'.format(crawler, cd))
+            cd += 1.5
     with open('httpalias', 'a') as fw:
         for s1 in pool:
             print(s1)
             for s2 in pool:
                 if not domain(s1) == domain(s2):
                     if s1.__eq__(s2):
-                        fw.write('{0} {1}'.format(s1.webpage, s2.webpage))
+                        fw.write('{0} {1}\n'.format(s1.webpage, s2.webpage))
     print('done one-round crawling')
     time.sleep(5)

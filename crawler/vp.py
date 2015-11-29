@@ -62,7 +62,9 @@ def crawl_full():
         params = {'page': page}
         response = requests.get(url + '/home/index.html', headers=headers, params=params)
         timestamp = time.time()
-        matches = soup(response.text, 'lxml').find('div', {'class': 'items'}).findAll('a')
+        s = soup(response.text, 'lxml')
+        matches = s.find('div', {'class': 'items'}).findAll('a')
+        pg = s.find('li', {'class': 'page active'})
         for match in matches:
             if not 'dota2-icon' in match.find('i').get('class'):
                 continue
@@ -73,7 +75,7 @@ def crawl_full():
                 notes = None
             href = url + match.get('href')
             yield crawl_details(href, series, notes)
-        if len(matches) < 10:
+        if not pg.findNextSibling():
             break
         page += 1
 

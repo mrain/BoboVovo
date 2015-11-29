@@ -18,15 +18,16 @@ def pc(x):
     return float(x[:-1]) / 100
 
 def close(s1, s2, k=1.25):
-    if len(s1) == len(s2) == 2:
+    if not isinstance(s1, str) and len(s1) == len(s2) == 2:
         return (close(s1[0], s2[1]) and close(s1[1], s2[0])) or (close(s1[0], s2[0]) and close(s1[1], s2[1]))
     return distance(s1, s2) < k * abs(len(s1) - len(s2))
 
 def stem(x):
-    if len(x) == 2:
+    if not isinstance(x, str) and len(x) == 2:
         return [stem(x[0]), stem(x[1])] 
     for stop in stops:
         x = x.replace(stop, '')
+    x = x.replace('-', '')
     return x
 
 class Match(object):
