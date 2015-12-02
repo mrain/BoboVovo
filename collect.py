@@ -27,9 +27,10 @@ while True:
                     pool.append(match)
         except KeyboardInterrupt:
             sys.exit(0)
-        except Exception:
+        except Exception as e:
             cooldown[crawler] = time.time() + cd
             print('{0} cooldowned for {1}s for exception'.format(crawler, cd))
+            print(e)
             cd += 1.5
     with open('httpalias', 'a') as fw:
         for s1 in pool:
@@ -38,5 +39,6 @@ while True:
                 if not domain(s1) == domain(s2):
                     if s1.__eq__(s2):
                         fw.write('{0} {1}\n'.format(s1.webpage, s2.webpage))
+                        print(s1.webpage, s2.webpage)
     print('done one-round crawling')
     time.sleep(5)

@@ -12,7 +12,7 @@ headers = {
 'User-Agent':'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.93 Safari/537.36',
 }
 tbd = 'TBD'
-stops = {'dota2', 'dota 2', 'united', 'gaming', 'team'}
+stops = {'dota2', 'dota-2', 'united', 'gaming', 'team'}
 
 def pc(x):
     return float(x[:-1]) / 100
@@ -20,7 +20,12 @@ def pc(x):
 def close(s1, s2, k=1.25):
     if not isinstance(s1, str) and len(s1) == len(s2) == 2:
         return (close(s1[0], s2[1]) and close(s1[1], s2[0])) or (close(s1[0], s2[0]) and close(s1[1], s2[1]))
-    return distance(s1, s2) < k * abs(len(s1) - len(s2))
+    print(distance(s1, s2), abs(len(s1) - len(s2)))
+    return distance(s1, s2) <= k * abs(len(s1) - len(s2))
+
+def seriesclose(s1, s2, k1=1.25, k2=0.5):
+    print(distance(s1, s2),abs(len(s1) - len(s2)),min(len(s1), len(s2)))
+    return distance(s1, s2) <= k1 * abs(len(s1) - len(s2)) or distance(s1, s2) <= k2 * min(len(s1), len(s2))
 
 def stem(x):
     if not isinstance(x, str) and len(x) == 2:
@@ -62,7 +67,8 @@ class Match(object):
     def __eq__(self, s):
         assert(isinstance(s, Match))
         assert(not tbd in self.teams and not tbd in s.teams)
-        if close(self.series, s.series) and close(stem(self.teams), stem(s.teams)):
+        print(self.webpage, s.webpage)
+        if seriesclose(self.series, s.series) and close(stem(self.teams), stem(s.teams)):
             return True
         else:
             return False

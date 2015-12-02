@@ -15,7 +15,7 @@ match_url = 'http://www.nxtgame.com/match/details/'
 
 def crawl_match(match_id):
     time.sleep(1)
-    response = requests.get(match_url + str(match_id), headers=headers)
+    response = requests.get(match_url + str(match_id), headers=headers, timeout=45)
     content = soup(response.content, 'html.parser')
     league = content.find('div', {'class': 'col-xs-6 text-left'}).p.text
     isLive = False
@@ -73,7 +73,7 @@ def crawl_match(match_id):
         )
 
 def crawl_full():
-    response = requests.get(url, headers=headers)
+    response = requests.get(url, headers=headers, timeout=45)
     content = soup(response.content, 'html.parser')
     matches = content.findAll('div', {'class': 'col-xs-12 item match-thumbnail'})
     for match in matches:
@@ -83,7 +83,7 @@ def crawl_full():
             yield s
 
 def crawl_home():
-    response = requests.get(url, headers=headers)
+    response = requests.get(url, headers=headers, timeout=45)
     content = soup(response.content, 'html.parser')
     matches = content.findAll('div', {'class': 'col-xs-12 item match-thumbnail'})
     for match in matches:

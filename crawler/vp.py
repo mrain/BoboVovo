@@ -17,13 +17,13 @@ from .utils import pc
 url = 'http://dota2.vpgame.com'
 
 def convert_time(t):
-    g = re.match('Schedule : (?P<dd>[0-9]{2})[a-z]{2} (?P<month_abbr>[a-zA-z]{3}) , (?P<yyyy>[0-9]{4}) (?P<hh>[0-9]{2}):(?P<mm>[0-9]{2}):(?P<ss>[0-9]{2})', t.strip())
+    g = re.match('Schedule : (?P<dd>[0-9]{1,2})[a-z]{2} (?P<month_abbr>[a-zA-z]{3}) , (?P<yyyy>[0-9]{4}) (?P<hh>[0-9]{2}):(?P<mm>[0-9]{2}):(?P<ss>[0-9]{2})', t.strip())
     return '{0}-{1}-{2} {3}:{4}'.format(g.group('yyyy'), month.index(g.group('month_abbr')), g.group('dd'), g.group('hh'), g.group('mm'))
 
 def crawl_details(webpage, series, notes):
     time.sleep(1)
     timestamp = time.time()
-    response = requests.get(webpage, headers=headers)
+    response = requests.get(webpage, headers=headers, timeout=45)
     s = soup(response.text, 'lxml')
     poolsize = int(''.join(s.find('div', {'class': 'spinach-item-tt'}).find_all(text=True,recursive=False)).strip())
     matchtime = convert_time(s.find('p', {'class': 'pull-right'}).find('span', {'class': 'mr-5'}).text)
@@ -60,7 +60,7 @@ def crawl_full():
     page = 1
     while True:
         params = {'page': page}
-        response = requests.get(url + '/home/index.html', headers=headers, params=params)
+        response = requests.get(url + '/home/index.html', headers=headers, params=params, timeout=45)
         timestamp = time.time()
         s = soup(response.text, 'lxml')
         matches = s.find('div', {'class': 'items'}).findAll('a')
@@ -83,7 +83,7 @@ def crawl_home():
     page = 1
     while True:
         params = {'page': page}
-        response = requests.get(url + '/home/index.html', headers=headers, params=params)
+        response = requests.get(url + '/home/index.html', headers=headers, params=params, timeout=45)
         timestamp = time.time()
         matches = soup(response.text, 'lxml').find('div', {'class': 'items'}).findAll('a')
         for match in matches:
@@ -106,6 +106,5 @@ def flowtest():
     print('vp crawler flowtest')
     print('crawling http://dota2.vpgame.com')
     print('Result:')
-    print(crawl_details('http://dota2.vpgame.com/guess-match-118525.html', 'test', 'test'))
     for s in crawl_full():
         print(s)

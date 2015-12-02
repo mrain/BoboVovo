@@ -33,7 +33,7 @@ def convert_time(t):
 def crawl_details(webpage, series, notes):
     time.sleep(2)
     timestamp = time.time()
-    response = requests.get(webpage, headers=headers)
+    response = requests.get(webpage, headers=headers, timeout=45)
     if 'nyx nyx' in response.text:
         time.sleep(15)
         assert(0)
@@ -43,8 +43,10 @@ def crawl_details(webpage, series, notes):
     botext = s.find('div', {'class': 'half', 'style': 'font-size: 0.8em;text-align: center;width: 28%;'}).text
     if 'Series' in botext:
         bestof = int(botext[0])
-    else:
+    elif 'Best' in botext:
         bestof = int(botext[-1])
+    else:
+        bestof = -1
     try:
         poolsize = re.search('placed (?P<no>[0-9]+)', [x.text.strip() for x in s.findAll('div', {'class': 'full'}) if 'placed' in x.text][0]).group('no')
     except Exception:
@@ -85,7 +87,7 @@ def crawl_details(webpage, series, notes):
         )
 
 def crawl_full():
-    response = requests.get(url, headers=headers)
+    response = requests.get(url, headers=headers, timeout=45)
     matches = soup(response.text, 'lxml').findAll('div', {'class': 'matchmain'})
     for match in matches:
         matchtime_rlt = convert_time(match.find('div', {'class': 'whenm'}).find(text=True, recursive=False))
@@ -98,7 +100,7 @@ def crawl_full():
         yield s
 
 def crawl_home():
-    response = requests.get(url, headers=headers)
+    response = requests.get(url, headers=headers, timeout=45)
     timestamp = time.time()
     matches = soup(response.text, 'lxml').findAll('div', {'class': 'matchmain'})
     for match in matches:

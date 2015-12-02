@@ -33,8 +33,8 @@ def convert_time(t):
 def crawl_details(webpage):
     time.sleep(1)
     timestamp = time.time()
-    response = requests.get(webpage, headers=headers)
-    response2 = requests.get('http://dota2bestyolo.com/match/index-right/id/{0}'.format(webpage.split('/')[-1]))
+    response = requests.get(webpage, headers=headers, timeout=45)
+    response2 = requests.get('http://dota2bestyolo.com/match/index-right/id/{0}'.format(webpage.split('/')[-1]), timeout=45)
     p = re.search('>(?P<pool>[0-9]*) items has been placed', response2.text)
     poolsize = int(p.group('pool'))
     s = soup(response.text, 'lxml')
@@ -76,7 +76,7 @@ def crawl_details(webpage):
         )
 
 def crawl_full():
-    response = requests.get(url, headers=headers)
+    response = requests.get(url, headers=headers, timeout=45)
     matches = soup(response.text, 'lxml').findAll('div', {'class': 'blk2'})
     for match in matches:
         matchtime_rlt = convert_time(match.find('div', {'class': 'time'}).find(text=True, recursive=False))
@@ -90,7 +90,7 @@ def crawl_full():
         yield s
 
 def crawl_home():
-    response = requests.get(url, headers=headers)
+    response = requests.get(url, headers=headers, timeout=45)
     timestamp = time.time()
     matches = soup(response.text, 'lxml').findAll('div', {'class': 'blk2'})
     for match in matches:
