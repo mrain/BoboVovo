@@ -75,7 +75,7 @@ def crawl_full():
                 notes = None
             href = url + match.get('href')
             yield crawl_details(href, series, notes)
-        if not pg.findNextSibling():
+        if not pg.findNextSibling() or 'Market' in pg.findNextSibling().find('a').get('href'):
             break
         page += 1
 
