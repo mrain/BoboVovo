@@ -21,7 +21,7 @@ while True:
         try:
             for match in call[crawler].crawl_full():
                 with matchfile(match) as fw:
-                    print(match.webpage)
+                    #print(match.webpage)
                     fw.write(str(match) + '\n')
                 if 0 < match.tostart < 3600 and not tbd in match.teams:
                     pool.append(match)
@@ -35,10 +35,13 @@ while True:
     with open('httpalias', 'a') as fw:
         for s1 in pool:
             print(s1)
-            for s2 in pool:
+        for i in range(len(pool)):
+            s1 = pool[i]
+            for j in range(i+1, len(pool)):
+                s2 = pool[j]
                 if not domain(s1) == domain(s2):
                     if s1.__eq__(s2):
                         fw.write('{0} {1}\n'.format(s1.webpage, s2.webpage))
-                        print(s1.webpage, s2.webpage)
+                        print('###MATCHED###', s1.webpage, s2.webpage)
     print('done one-round crawling')
     time.sleep(5)
