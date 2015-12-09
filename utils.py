@@ -14,7 +14,7 @@ def domain(s):
 def red(s):
     return(colorama.Fore.RED + s.__str__() + colorama.Fore.WHITE)
 
-def email(content='NO CONTENT', subject='NO SUBJECT', email_to = ['wangbx66@gmail.com']):
+def mandrill(content='NO CONTENT', subject='NO SUBJECT', email_to = ['wangbx66@gmail.com']):
     client = mandrill.Mandrill('trD65wtdBM16dNDeW7iPVQ')
     message = {
     'from_email': 'message.wangbx66@gmail.com',
