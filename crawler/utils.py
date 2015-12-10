@@ -20,11 +20,9 @@ def pc(x):
 def close(s1, s2, k=1.25):
     if not isinstance(s1, str) and len(s1) == len(s2) == 2:
         return (close(s1[0], s2[1]) and close(s1[1], s2[0])) or (close(s1[0], s2[0]) and close(s1[1], s2[1]))
-    print(distance(s1, s2), abs(len(s1) - len(s2)))
     return distance(s1, s2) <= k * abs(len(s1) - len(s2))
 
 def seriesclose(s1, s2, k1=1.25, k2=0.5):
-    print(distance(s1, s2),abs(len(s1) - len(s2)),min(len(s1), len(s2)))
     return distance(s1, s2) <= k1 * abs(len(s1) - len(s2)) or distance(s1, s2) <= k2 * min(len(s1), len(s2))
 
 def stem(x):

@@ -5,9 +5,11 @@ Stranger, welcome to the best ~~bontting~~research project on earth.
 ## Dependency
 
 * python
-* beautifulsoup4 from pip/conda, with lxml parser
-* back-up with html5lib parser, if deemed necessary
-* python-slugify from pip/conda
+* beautifulsoup4, with lxml/html5lib parser
+* python-slugify
+* python-Levenshtein
+* mandrill
+* colorama
 * a wooden desktop with a plastic keyboard
    
 ## Key Components
