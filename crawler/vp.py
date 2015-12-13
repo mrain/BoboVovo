@@ -16,6 +16,12 @@ from .utils import pc
 
 url = 'http://dota2.vpgame.com'
 
+'''
+Notes on vp:
+1. Matchtime/Tostart, which are extracted from the time bar of the match webpage, are not stable and suffer from glitch.
+2. We track the status from the webpage to get active attribute. The status goes either null (which is betable), Live, null (for a shortwhile), Cleared or null, Cancel. Note that a match will be removed from then frontpage after the second null period.
+'''
+
 def convert_time(t):
     g = re.match('Schedule : (?P<dd>[0-9]{1,2})[a-z]{2} (?P<month_abbr>[a-zA-z]{3}) , (?P<yyyy>[0-9]{4}) (?P<hh>[0-9]{2}):(?P<mm>[0-9]{2}):(?P<ss>[0-9]{2})', t.strip())
     return '{0}-{1}-{2} {3}:{4}'.format(g.group('yyyy'), month.index(g.group('month_abbr')), g.group('dd'), g.group('hh'), g.group('mm'))
@@ -37,7 +43,7 @@ def crawl_details(webpage, series, notes):
     if 'Cleared' in status:
         result = s.find('span', {'class': 'spinach-team-score'}).text.strip().split(':')
         active = False
-    elif 'Cancel' in status or 'live' in status or 'Live' in status:
+    elif 'Cancel' in status or 'Live' in status:
         active = False
     else:
         active = True

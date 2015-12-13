@@ -8,6 +8,9 @@ def matchfile(s, mode='a'):
     webpage = s.webpage.replace('/', '$')
     return open(join('matches', webpage), mode)
 
+def matchurl(s):
+    return s.replace('$', '/')
+
 def domain(s):
     return s.webpage.split('/')[2]
 

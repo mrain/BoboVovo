@@ -65,7 +65,6 @@ class Match(object):
     def __eq__(self, s):
         assert(isinstance(s, Match))
         assert(not tbd in self.teams and not tbd in s.teams)
-        print(self.webpage, s.webpage)
         if seriesclose(self.series, s.series) and close(stem(self.teams), stem(s.teams)):
             return True
         else:
@@ -75,7 +74,7 @@ class Match(object):
         return json.dumps(self.__dict__)
 
     @staticmethod
-    def load(s):
-        obj = match(active='', matchtime='', webpage='')
+    def loads(s):
+        obj = Match(active='', matchtime='', webpage='')
         obj.__dict__ = json.loads(s)
         return obj

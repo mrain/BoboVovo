@@ -11,6 +11,11 @@ from .utils import pc
 
 url = 'http://dota2lounge.com/'
 
+'''
+Notes on d2l:
+1. Tostart, which are extracted from the "** minutes from now" bar, could be manually set to a small positive number (say, 1k~4k) after it's negative for a while. In this script active is guessed from tostart.
+'''
+
 def convert_time(t):
     s = t.split()
     absolute = int(s[0])

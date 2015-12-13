@@ -11,6 +11,13 @@ from .utils import pc
 
 url = 'http://dota2bestyolo.com/'
 
+'''
+Notes on yolo:
+1. Tostart, which are extracted from the "** mins from now" bar, could be manually set to a small positive number (say, 1k) after it's negative for a while. In this script active is guessed from tostart.
+2. It used to happen that the time was misset to be hours before the true match live. yolo could resume the match to be betable until it's live.
+3. It's staff used to put a wrong matchtime (say, 1 hr ago) when they are juz to put this match online (poolsize is small atm). They'd fix it soon after the post.
+'''
+
 def convert_time(t):
     s = t.split()
     absolute = int(s[0])

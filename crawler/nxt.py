@@ -13,6 +13,11 @@ from .utils import pc
 url = 'http://www.nxtgame.com/?sports=1'
 match_url = 'http://www.nxtgame.com/match/details/'
 
+'''
+Notes on nxt:
+1. Tostart, which are extracted from the "** mins from now" bar, could be manually set to a small positive number (say, 1k) after it's negative for a while. islive, which is indicated from the special live bar, is consistent with the manually setting.
+'''
+
 def crawl_match(match_id):
     time.sleep(1)
     response = requests.get(match_url + str(match_id), headers=headers, timeout=45)
