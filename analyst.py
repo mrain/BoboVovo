@@ -18,14 +18,24 @@ def stable_active_indicator():
 
 def stable_poolsize():
     for f in os.listdir('matches'):
-        (poolsize, tcap) = 0, 0
-        for line in open('matches/{0}'.format(f)):
+        a = []
+        ps = 0
+        idx1 = 0
+        for idx, line in enumerate(open('matches/{0}'.format(f))):
             s = Match.loads(line)
-            if s.poolsize > poolsize:
-                poolsize, tcap = s.poolsize, s.tostart
-        if s.tostart <= 0:
-            print(matchurl(f), tcap)
+            a.append(s.active)
+            if s.poolsize > ps:
+                ps = s.poolsize
+                idx1 = idx
+        cnt = 0
+        for idx in range(len(a)-1, -1, -1):
+            cnt = (a[idx] is True) * (cnt + 1)
+            if cnt == 3:
+                break
+        idx2 = idx + 3
+        if idx1 > idx2:
+            print(matchurl(f), idx1, idx2)
     
-
+stable_poolsize()
 #with open('httpalias') as fp:
     

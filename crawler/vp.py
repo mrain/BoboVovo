@@ -20,6 +20,7 @@ url = 'http://dota2.vpgame.com'
 Notes on vp:
 1. Matchtime/Tostart, which are extracted from the time bar of the match webpage, are not stable and suffer from glitch.
 2. We track the status from the webpage to get active attribute. The status goes either null (which is betable), Live, null (for a shortwhile), Cleared or null, Cancel. Note that a match will be removed from then frontpage after the second null period.
+3. vp poolsize could rise even after the match start.
 '''
 
 def convert_time(t):
