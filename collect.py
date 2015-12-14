@@ -21,7 +21,6 @@ while True:
         try:
             for match in call[crawler].crawl_full():
                 with matchfile(match) as fw:
-                    #print(match.webpage)
                     fw.write(str(match) + '\n')
                 if 0 < match.tostart < 3600 and not tbd in match.teams:
                     pool.append(match)

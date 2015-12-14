@@ -7,12 +7,11 @@ import json
 from slugify import slugify
 from Levenshtein import distance
 
-
 headers = {
 'User-Agent':'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.93 Safari/537.36',
 }
 tbd = 'TBD'
-stops = {'dota2', 'dota-2', 'united', 'gaming', 'team'}
+stops = {'dota2', 'dota-2', 'united', 'gaming', 'team', '-', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0'}
 
 def pc(x):
     return float(x[:-1]) / 100
@@ -30,7 +29,6 @@ def stem(x):
         return [stem(x[0]), stem(x[1])] 
     for stop in stops:
         x = x.replace(stop, '')
-    x = x.replace('-', '')
     return x
 
 class Match(object):
@@ -65,7 +63,7 @@ class Match(object):
     def __eq__(self, s):
         assert(isinstance(s, Match))
         assert(not tbd in self.teams and not tbd in s.teams)
-        if seriesclose(self.series, s.series) and close(stem(self.teams), stem(s.teams)):
+        if seriesclose(stem(self.series), stem(s.series)) and close(stem(self.teams), stem(s.teams)):
             return True
         else:
             return False

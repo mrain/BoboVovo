@@ -39,8 +39,10 @@ def crawl_details(webpage, series, notes):
     time.sleep(2)
     timestamp = time.time()
     response = requests.get(webpage, headers=headers, timeout=45)
+    with open('errord2l', 'w') as fw:
+        fw.write(response.text)
     if 'nyx nyx' in response.text:
-        time.sleep(15)
+        time.sleep(35)
         assert(0)
     s = soup(response.text, 'lxml')
     matchtime_rlt = convert_time(s.find('div', {'class': 'half', 'style': 'font-size: 0.8em;width: 33%;'}).text)
