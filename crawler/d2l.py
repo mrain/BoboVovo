@@ -19,12 +19,14 @@ Notes on d2l:
 def convert_time(t):
     s = t.split()
     absolute = int(s[0])
-    if s[1] in {'minute', 'minutes'}:
+    if s[1] in {'second', 'seconds'}:
         multiplier = 1
-    elif s[1] in {'hour', 'hours'}:
+    if s[1] in {'minute', 'minutes'}:
         multiplier = 60
-    elif s[1] in {'day', 'days'}:
+    elif s[1] in {'hour', 'hours'}:
         multiplier = 1440
+    elif s[1] in {'day', 'days'}:
+        multiplier = 86400
     if s[2] == 'ago':
         sign = -1
     elif s[2] == 'from':
@@ -33,10 +35,10 @@ def convert_time(t):
         live = 1
     else:
         live = -1
-    return absolute * multiplier * sign * 60
+    return absolute * multiplier * sign
 
 def crawl_details(webpage, series, notes):
-    time.sleep(2)
+    time.sleep(1)
     timestamp = time.time()
     response = requests.get(webpage, headers=headers, timeout=45)
     with open('errord2l', 'w') as fw:
