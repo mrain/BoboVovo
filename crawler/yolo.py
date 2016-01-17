@@ -21,12 +21,14 @@ Notes on yolo:
 def convert_time(t):
     s = t.split()
     absolute = int(s[0])
-    if s[1] in {'min', 'mins'}:
+    if s[1] in {'sec', 'secs'}:
         multiplier = 1
-    elif s[1] in {'hr', 'hrs'}:
+    if s[1] in {'min', 'mins'}:
         multiplier = 60
-    elif s[1] in {'day', 'days'}:
+    elif s[1] in {'hr', 'hrs'}:
         multiplier = 1440
+    elif s[1] in {'day', 'days'}:
+        multiplier = 86400
     if s[2] == 'ago':
         sign = -1
     elif s[2] == 'from':
@@ -35,7 +37,7 @@ def convert_time(t):
         live = 1
     else:
         live = -1
-    return absolute * multiplier * sign * 60
+    return absolute * multiplier * sign
 
 def crawl_details(webpage):
     time.sleep(1)
@@ -89,6 +91,8 @@ def crawl_full():
         matchtime_rlt = convert_time(match.find('div', {'class': 'time'}).find(text=True, recursive=False))
         if matchtime_rlt < -3600:
             continue
+        #elif matchtime_rlt > 3600:
+        #    continue
         series = match.find('div', {'class': 'series'}).text
         if series.startswith('*'): # which indicates non-dota2 series/match
             continue

@@ -14,6 +14,10 @@ def matchurl(s):
 def domain(s):
     return s.webpage.split('/')[2]
 
+def lb(s):
+    z = min([a for a in range(1, 3) if int(10**a * s) == 10**a * s])
+    return s - 10**(-z)/2
+
 def red(s):
     return(colorama.Fore.RED + s.__str__() + colorama.Fore.WHITE)
 

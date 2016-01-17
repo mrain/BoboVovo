@@ -28,15 +28,17 @@ def convert_time(t):
     if s[0] == 'Live':
         return -1
     absolute = int(s[0])
-    if s[1] in {'min'}:
+    if s[1] in {'s', 'sec', 'second'}:
         multiplier = 1
-    elif s[1] in {'h'}:
+    if s[1] in {'min'}:
         multiplier = 60
-    elif s[1] in {'d'}:
+    elif s[1] in {'h'}:
         multiplier = 1440
+    elif s[1] in {'d'}:
+        multiplier = 86400
     if s[2] == 'later':
         sign = 1
-    return absolute * multiplier * sign * 60
+    return absolute * multiplier * sign
 
 def convert_abs_time(t):
     g = re.match('Schedule : (?P<dd>[0-9]{1,2})[a-z]{2} (?P<month_abbr>[a-zA-z]{3}) , (?P<yyyy>[0-9]{4}) (?P<hh>[0-9]{2}):(?P<mm>[0-9]{2}):(?P<ss>[0-9]{2})', t.strip())
@@ -91,6 +93,8 @@ def crawl_full():
         params = {'page': page}
         response = requests.get(url + '/home/index.html', headers=headers, params=params, timeout=45)
         timestamp = time.time()
+        with open('tmp', 'w') as fw:
+            fw.write(response.text)
         s = soup(response.text, 'lxml')
         matches = s.find('div', {'class': 'items'}).findAll('a')
         pg = s.find('li', {'class': 'page active'})

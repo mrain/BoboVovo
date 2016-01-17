@@ -102,6 +102,8 @@ def crawl_full():
         matchtime_rlt = convert_time(match.find('div', {'class': 'whenm'}).find(text=True, recursive=False))
         if matchtime_rlt < -3600:
             continue
+        #elif matchtime_rlt > 3600:
+        #    continue
         href = url + match.find('a').get('href')
         series = match.find('div', {'class': 'eventm'}).text
         notes = re.sub(r'[Â\xa0]+', '', match.find('span', {'style': 'font-weight: bold; color: #D12121'}).text)
