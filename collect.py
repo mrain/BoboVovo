@@ -18,7 +18,7 @@ from utils import lb
 
 cooldown = {crawler:0 for crawler in all_crawlers}
 cd = 95
-profit = -0.1
+profit_trs = 0.02
 
 while True:
     pool = {}
@@ -47,10 +47,11 @@ while True:
         for idx, c in enumerate(networkx.connected_components(G)):
             fw.write(' '.join(c) + '\n')
             print('###MATCHED### {0}: '.format(idx) + ' '.join(c))
-            if max([pool[w].returns[0] for w in c]) * max([pool[w].returns[1] for w in c]) < 1 + profit:
-                continue
+            profit = (max([pool[w].returns[0] for w in c]) - 1) * (max([pool[w].returns[1] for w in c]) - 1) - 1
+            #if profit < profit_trs:
+            #    continue
+            print(red('    PROFIT {0:.3}'.format(profit)))
             for w in c:
                 s = pool[w]
                 print(red('    {0} {1} ({2}): {3} {4} {5}'.format(s.teams[0], s.teams[1], s.series, s.returns, domain(s), s.tostart)))
-    #print('done one-round crawling')
     time.sleep(5)

@@ -26,7 +26,7 @@ def convert_time(t):
     if s[1] in {'min', 'mins'}:
         multiplier = 60
     elif s[1] in {'hr', 'hrs'}:
-        multiplier = 1440
+        multiplier = 3600
     elif s[1] in {'day', 'days'}:
         multiplier = 86400
     if s[2] == 'ago':

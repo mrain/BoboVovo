@@ -33,7 +33,7 @@ def convert_time(t):
     if s[1] in {'min'}:
         multiplier = 60
     elif s[1] in {'h'}:
-        multiplier = 1440
+        multiplier = 3600
     elif s[1] in {'d'}:
         multiplier = 86400
     if s[2] == 'later':
