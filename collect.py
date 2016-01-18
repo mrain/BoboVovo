@@ -18,7 +18,7 @@ from utils import lb
 
 cooldown = {crawler:0 for crawler in all_crawlers}
 cd = 95
-profit_trs = 0.02
+profit_trs = 0.05
 
 while True:
     pool = {}
@@ -48,10 +48,10 @@ while True:
             fw.write(' '.join(c) + '\n')
             print('###MATCHED### {0}: '.format(idx) + ' '.join(c))
             profit = (max([pool[w].returns[0] for w in c]) - 1) * (max([pool[w].returns[1] for w in c]) - 1) - 1
-            #if profit < profit_trs:
-            #    continue
+            if profit < profit_trs:
+                continue
             print(red('    PROFIT {0:.3}'.format(profit)))
             for w in c:
                 s = pool[w]
-                print(red('    {0} {1} ({2}): {3} {4} {5}'.format(s.teams[0], s.teams[1], s.series, s.returns, domain(s), s.tostart)))
+                print(red('    {0} {1} ({2}): {3}/{4} {5} {6}'.format(s.teams[0], s.teams[1], s.series, s.returns, s.poolsize, domain(s), s.tostart)))
     time.sleep(5)
